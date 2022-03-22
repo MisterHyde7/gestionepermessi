@@ -42,6 +42,14 @@ public class Messaggio {
 		this.oggetto = oggetto;
 	}
 
+	public Messaggio(Long id, String testo, String oggetto, boolean letto) {
+		super();
+		this.id = id;
+		this.testo = testo;
+		this.oggetto = oggetto;
+		this.letto = letto;
+	}
+
 	public Messaggio(Long id, String testo, String oggetto, boolean letto, Utente utente) {
 		super();
 		this.id = id;

@@ -60,6 +60,15 @@ public class Dipendente {
 		this.sesso = sesso;
 	}
 
+	public Dipendente(Long id, String nome, String cognome, String codFis, String email) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.cognome = cognome;
+		this.codFis = codFis;
+		this.email = email;
+	}
+
 	public Dipendente(String nome, String cognome, String codFis, String email, Date dataNascita, Sesso sesso) {
 		super();
 		this.nome = nome;
