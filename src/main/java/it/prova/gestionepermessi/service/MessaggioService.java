@@ -2,6 +2,8 @@ package it.prova.gestionepermessi.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+
 import it.prova.gestionepermessi.model.Messaggio;
 
 public interface MessaggioService {
@@ -15,4 +17,7 @@ public interface MessaggioService {
 	public void inserisciNuovo(Messaggio messaggioInstance);
 
 	public void rimuovi(Messaggio messaggioInstance);
+
+	public Page<Messaggio> findByExampleWithPagination(Messaggio buildMessaggioModel, Integer pageNo, Integer pageSize,
+			String sortBy);
 }

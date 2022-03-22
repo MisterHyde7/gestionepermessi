@@ -2,6 +2,8 @@ package it.prova.gestionepermessi.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+
 import it.prova.gestionepermessi.model.RichiestaPermesso;
 
 public interface RichiestaPermessoService {
@@ -15,4 +17,7 @@ public interface RichiestaPermessoService {
 	public void inserisciNuovo(RichiestaPermesso permessoInstance);
 
 	public void rimuovi(RichiestaPermesso permessoInstance);
+
+	public Page<RichiestaPermesso> findByExampleWithPagination(RichiestaPermesso buildRichiestaPermessoModel,
+			Integer pageNo, Integer pageSize, String sortBy);
 }
