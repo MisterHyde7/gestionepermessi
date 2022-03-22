@@ -40,6 +40,8 @@ public class UtenteDTO {
 
 	private Long[] ruoliIds;
 
+	private Long[] messaggiIds;
+
 	public UtenteDTO() {
 	}
 
@@ -124,6 +126,14 @@ public class UtenteDTO {
 		this.ruoliIds = ruoliIds;
 	}
 
+	public Long[] getMessaggiIds() {
+		return messaggiIds;
+	}
+
+	public void setMessaggiIds(Long[] messaggiIds) {
+		this.messaggiIds = messaggiIds;
+	}
+
 	public boolean isAttivo() {
 		return this.stato != null && this.stato.equals(StatoUtente.ATTIVO);
 	}
@@ -152,7 +162,7 @@ public class UtenteDTO {
 
 		return result;
 	}
-	
+
 	public static List<UtenteDTO> createUtenteDTOListFromModelList(List<Utente> modelListInput) {
 		return modelListInput.stream().map(utenteEntity -> {
 			return UtenteDTO.buildUtenteDTOFromModel(utenteEntity);

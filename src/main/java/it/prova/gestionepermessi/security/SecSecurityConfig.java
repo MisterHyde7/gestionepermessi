@@ -37,8 +37,8 @@ public class SecSecurityConfig extends WebSecurityConfigurerAdapter {
     	 http.authorizeRequests()
          .antMatchers("/assets/**").permitAll()
          .antMatchers("/login").permitAll()
-         .antMatchers("/utente/**").hasRole("ADMIN")
-         .antMatchers("/**").hasAnyRole("ADMIN", "CLASSIC_USER")
+         .antMatchers("/utente/**").hasAnyRole("ADMIN", "ROLE_BO_USER")
+         .antMatchers("/**").hasAnyRole("ADMIN", "ROLE_BO_USER", "ROLE_DIPENDENTE_USER")
          //.antMatchers("/anonymous*").anonymous()
          .anyRequest().authenticated()
          .and().exceptionHandling().accessDeniedPage("/accessDenied")
@@ -58,6 +58,5 @@ public class SecSecurityConfig extends WebSecurityConfigurerAdapter {
          .and()
             .csrf()
             .disable();
-//         
     }
 }
