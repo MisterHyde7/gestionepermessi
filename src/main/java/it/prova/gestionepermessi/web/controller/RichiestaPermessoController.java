@@ -23,70 +23,70 @@ import it.prova.gestionepermessi.model.RichiestaPermesso;
 import it.prova.gestionepermessi.service.RichiestaPermessoService;
 
 @Controller
-@RequestMapping(value = "/utente")
+@RequestMapping(value = "/permesso")
 public class RichiestaPermessoController {
 
 	@Autowired
 	private RichiestaPermessoService richiestaPermessoService;
 
 	@GetMapping
-	public ModelAndView listAllUtenti() {
+	public ModelAndView listAllPermessi() {
 		ModelAndView mv = new ModelAndView();
 		List<RichiestaPermesso> permessi = richiestaPermessoService.listAll();
 		mv.addObject("permesso_list_attribute", permessi);
-		mv.setViewName("utente/list");
+		mv.setViewName("permesso/list");
 		return mv;
 	}
 
 	@GetMapping("/search")
 	public String searchPermesso(Model model) {
-		return "utente/search";
+		return "permesso/search";
 	}
 
 	@GetMapping("/insert")
-	public String create(Model model) {
+	public String createPermesso(Model model) {
 		model.addAttribute("insert_permesso_attr", new RichiestaPermessoDTO());
-		return "utente/insert";
+		return "permesso/insert";
 	}
 
 	@PostMapping("/save")
-	public String save(@ModelAttribute("insert_permesso_attr") RichiestaPermessoDTO richiestaPermessoDTO,
+	public String savePermesso(@ModelAttribute("insert_permesso_attr") RichiestaPermessoDTO richiestaPermessoDTO,
 			BindingResult result, Model model, RedirectAttributes redirectAttrs) {
 
 		if (result.hasErrors()) {
-			return "utente/insert";
+			return "permesso/insert";
 		}
 		richiestaPermessoService.inserisciNuovo(richiestaPermessoDTO.buildRichiestaPermessoModel());
 
 		redirectAttrs.addFlashAttribute("successMessage", "Operazione eseguita correttamente");
-		return "redirect:/utente";
+		return "redirect:/permesso";
 	}
 
 	@GetMapping("/edit/{idPermesso}")
-	public String edit(@PathVariable(required = true) Long idPermesso, Model model) {
+	public String editPermesso(@PathVariable(required = true) Long idPermesso, Model model) {
 		RichiestaPermesso permessoModel = richiestaPermessoService.caricaSingoloElemento(idPermesso);
 		model.addAttribute("edit_permesso_attr",
 				RichiestaPermessoDTO.buildRichiestaPermessoDTOFromModel(permessoModel));
-		return "utente/edit";
+		return "permesso/edit";
 	}
 
 	@PostMapping("/update")
-	public String update(@ModelAttribute("edit_permesso_attr") RichiestaPermessoDTO richiestaPermessoDTO,
+	public String updatePermesso(@ModelAttribute("edit_permesso_attr") RichiestaPermessoDTO richiestaPermessoDTO,
 			BindingResult result, Model model, RedirectAttributes redirectAttrs, HttpServletRequest request) {
 
 		if (result.hasErrors()) {
-			return "utente/edit";
+			return "permesso/edit";
 		}
 		richiestaPermessoService.aggiorna(richiestaPermessoDTO.buildRichiestaPermessoModel());
 
 		redirectAttrs.addFlashAttribute("successMessage", "Operazione eseguita correttamente");
-		return "redirect:/utente";
+		return "redirect:/permesso";
 	}
 
 	@GetMapping("/show/{idPermesso}")
 	public String showPermesso(@PathVariable(required = true) Long idPermesso, Model model) {
 		model.addAttribute("show_permesso_attr", richiestaPermessoService.caricaSingoloElemento(idPermesso));
-		return "utente/show";
+		return "permesso/show";
 	}
 
 	@PostMapping("/list")
@@ -100,7 +100,7 @@ public class RichiestaPermessoController {
 
 		model.addAttribute("permesso_list_attribute",
 				RichiestaPermessoDTO.createRichiestaPermessoListFromModelList(permessi));
-		return "utente/list";
+		return "permesso/list";
 	}
 
 }

@@ -53,14 +53,14 @@ public class UtenteController {
 	}
 
 	@GetMapping("/insert")
-	public String create(Model model) {
+	public String createUtente(Model model) {
 		model.addAttribute("ruoli_totali_attr", RuoloDTO.createRuoloDTOListFromModelList(ruoloService.listAll()));
 		model.addAttribute("insert_utente_attr", new UtenteDTO());
 		return "utente/insert";
 	}
 
 	@PostMapping("/save")
-	public String save(
+	public String saveUtente(
 			@Validated({ ValidationWithPassword.class,
 					ValidationNoPassword.class }) @ModelAttribute("insert_utente_attr") UtenteDTO utenteDTO,
 			BindingResult result, Model model, RedirectAttributes redirectAttrs) {
@@ -79,7 +79,7 @@ public class UtenteController {
 	}
 
 	@GetMapping("/edit/{idUtente}")
-	public String edit(@PathVariable(required = true) Long idUtente, Model model) {
+	public String editUtente(@PathVariable(required = true) Long idUtente, Model model) {
 		Utente utenteModel = utenteService.caricaSingoloUtenteConRuoli(idUtente);
 		model.addAttribute("edit_utente_attr", UtenteDTO.buildUtenteDTOFromModel(utenteModel));
 		model.addAttribute("ruoli_totali_attr", RuoloDTO.createRuoloDTOListFromModelList(ruoloService.listAll()));
@@ -87,7 +87,8 @@ public class UtenteController {
 	}
 
 	@PostMapping("/update")
-	public String update(@Validated(ValidationNoPassword.class) @ModelAttribute("edit_utente_attr") UtenteDTO utenteDTO,
+	public String updateUtente(
+			@Validated(ValidationNoPassword.class) @ModelAttribute("edit_utente_attr") UtenteDTO utenteDTO,
 			BindingResult result, Model model, RedirectAttributes redirectAttrs, HttpServletRequest request) {
 
 		if (result.hasErrors()) {

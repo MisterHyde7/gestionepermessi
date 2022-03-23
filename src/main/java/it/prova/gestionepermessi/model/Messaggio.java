@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -31,6 +32,10 @@ public class Messaggio {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "utente_id", nullable = false)
 	private Utente utente;
+
+	@OneToOne
+	@JoinColumn(name = "permesso_id")
+	private RichiestaPermesso richiestaPermesso;
 
 	public Messaggio() {
 		super();
@@ -97,6 +102,14 @@ public class Messaggio {
 
 	public void setUtente(Utente utente) {
 		this.utente = utente;
+	}
+
+	public RichiestaPermesso getRichiestaPermesso() {
+		return richiestaPermesso;
+	}
+
+	public void setRichiestaPermesso(RichiestaPermesso richiestaPermesso) {
+		this.richiestaPermesso = richiestaPermesso;
 	}
 
 }

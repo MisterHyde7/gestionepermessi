@@ -23,7 +23,7 @@ import it.prova.gestionepermessi.model.Messaggio;
 import it.prova.gestionepermessi.service.MessaggioService;
 
 @Controller
-@RequestMapping(value = "/backoffice")
+@RequestMapping(value = "/messaggio")
 public class MessaggioController {
 
 	@Autowired
@@ -34,13 +34,13 @@ public class MessaggioController {
 		ModelAndView mv = new ModelAndView();
 		List<Messaggio> messaggi = messaggioService.listAll();
 		mv.addObject("messaggio_list_attribute", messaggi);
-		mv.setViewName("backoffice/list");
+		mv.setViewName("messaggio/list");
 		return mv;
 	}
 
 	@GetMapping("/search")
 	public String searchMessaggi(Model model) {
-		return "backoffice/search";
+		return "messaggio/search";
 	}
 
 	@PostMapping("/list")
@@ -53,52 +53,52 @@ public class MessaggioController {
 				.getContent();
 
 		model.addAttribute("messaggio_list_attribute", MessaggioDTO.createMessaggioDTOListFromModelList(messaggi));
-		return "backoffice/list";
+		return "messaggio/list";
 	}
 
 	@GetMapping("/show/{idMessaggio}")
 	public String showMessaggio(@PathVariable(required = true) Long idMessaggio, Model model) {
 		model.addAttribute("show_messaggio_attr",
 				MessaggioDTO.buildMessaggioDTOFromModel(messaggioService.caricaSingoloElemento(idMessaggio)));
-		return "backoffice/show";
+		return "messaggio/show";
 	}
 
 	@GetMapping("/insert")
-	public String create(Model model) {
+	public String createMessaggio(Model model) {
 		model.addAttribute("insert_messaggio_attr", new MessaggioDTO());
-		return "backoffice/insert";
+		return "messaggio/insert";
 	}
 
 	@PostMapping("/save")
-	public String save(@ModelAttribute("insert_messaggio_attr") MessaggioDTO messaggioDTO, BindingResult result,
-			Model model, RedirectAttributes redirectAttrs) {
+	public String saveMessaggio(@ModelAttribute("insert_messaggio_attr") MessaggioDTO messaggioDTO,
+			BindingResult result, Model model, RedirectAttributes redirectAttrs) {
 
 		if (result.hasErrors()) {
-			return "backoffice/insert";
+			return "messaggio/insert";
 		}
 		messaggioService.inserisciNuovo(messaggioDTO.buildMessaggioModel());
 
 		redirectAttrs.addFlashAttribute("successMessage", "Operazione eseguita correttamente");
-		return "redirect:/backoffice";
+		return "redirect:/messaggio";
 	}
 
 	@GetMapping("/edit/{idMessaggio}")
-	public String edit(@PathVariable(required = true) Long idMessaggio, Model model) {
+	public String editMessaggio(@PathVariable(required = true) Long idMessaggio, Model model) {
 		Messaggio messaggioModel = messaggioService.caricaSingoloElemento(idMessaggio);
 		model.addAttribute("edit_messaggio_attr", MessaggioDTO.buildMessaggioDTOFromModel(messaggioModel));
-		return "backoffice/edit";
+		return "messaggio/edit";
 	}
 
 	@PostMapping("/update")
-	public String update(@ModelAttribute("edit_messaggio_attr") MessaggioDTO messaggioDTO, BindingResult result,
-			Model model, RedirectAttributes redirectAttrs, HttpServletRequest request) {
+	public String updateMessaggio(@ModelAttribute("edit_messaggio_attr") MessaggioDTO messaggioDTO,
+			BindingResult result, Model model, RedirectAttributes redirectAttrs, HttpServletRequest request) {
 
 		if (result.hasErrors()) {
-			return "backoffice/edit";
+			return "messaggio/edit";
 		}
 		messaggioService.aggiorna(messaggioDTO.buildMessaggioModel());
 
 		redirectAttrs.addFlashAttribute("successMessage", "Operazione eseguita correttamente");
-		return "redirect:/backoffice";
+		return "redirect:/messaggio";
 	}
 }
