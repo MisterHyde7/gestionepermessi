@@ -45,6 +45,14 @@ public class UtenteDTO {
 	public UtenteDTO() {
 	}
 
+	public UtenteDTO(Long id, String nome, String cognome, StatoUtente stato) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.cognome = cognome;
+		this.stato = stato;
+	}
+
 	public UtenteDTO(Long id, String username, String nome, String cognome, StatoUtente stato) {
 		super();
 		this.id = id;
@@ -143,8 +151,7 @@ public class UtenteDTO {
 	}
 
 	public Utente buildUtenteModel(boolean includeIdRoles) {
-		Utente result = new Utente(this.id, this.username, this.password, this.nome, this.cognome, this.dateCreated,
-				this.stato);
+		Utente result = new Utente(this.id, this.nome, this.cognome, this.stato);
 		if (includeIdRoles && ruoliIds != null)
 			result.setRuoli(Arrays.asList(ruoliIds).stream().map(id -> new Ruolo(id)).collect(Collectors.toSet()));
 

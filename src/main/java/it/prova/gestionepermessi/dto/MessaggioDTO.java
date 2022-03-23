@@ -101,9 +101,6 @@ public class MessaggioDTO {
 		MessaggioDTO result = new MessaggioDTO(messaggioModel.getId(), messaggioModel.getTesto(),
 				messaggioModel.getOggetto(), messaggioModel.isLetto());
 
-		if (messaggioModel.getUtente() != null)
-			result.setUtente(UtenteDTO.buildUtenteDTOFromModel(messaggioModel.getUtente()));
-
 		return result;
 	}
 

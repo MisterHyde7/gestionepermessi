@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.data.domain.Page;
 
+import it.prova.gestionepermessi.model.Dipendente;
 import it.prova.gestionepermessi.model.Utente;
 
 public interface UtenteService {
@@ -29,5 +30,7 @@ public interface UtenteService {
 	public Utente findByUsername(String username);
 
 	public Page<Utente> findByExampleWithPagination(Utente example, Integer pageNo, Integer pageSize, String sortBy);
+	
+	public void inserisciNuovoConDipendente(Utente utenteInstance, Dipendente dipendenteInstance);
 
 }

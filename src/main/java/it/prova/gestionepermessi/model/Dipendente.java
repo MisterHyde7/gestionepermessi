@@ -12,7 +12,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -45,7 +44,6 @@ public class Dipendente {
 	private Sesso sesso;
 
 	@OneToOne
-	@JoinColumn(name = "utente_id", unique = true)
 	private Utente utente;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "dipendente")
@@ -55,12 +53,54 @@ public class Dipendente {
 		super();
 	}
 
+	public Dipendente(String nome, String cognome) {
+		super();
+		this.nome = nome;
+		this.cognome = cognome;
+		if (!(nome.isBlank() && cognome.isBlank()))
+			this.email = nome.toLowerCase().charAt(0) + "." + cognome.toLowerCase() + "@solvingteam.it";
+	}
+
+	public Dipendente(String nome, String cognome, String codFis, Date dataNascita) {
+		super();
+		this.nome = nome;
+		this.cognome = cognome;
+		this.codFis = codFis;
+		if (!(nome.isBlank() && cognome.isBlank()))
+			this.email = nome.toLowerCase().charAt(0) + "." + cognome.toLowerCase() + "@solvingteam.it";
+		this.dataNascita = dataNascita;
+	}
+
+	public Dipendente(Long id, String nome, String cognome, String codFis, Date dataNascita, Date dataAssunzione,
+			Sesso sesso) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.cognome = cognome;
+		this.codFis = codFis;
+		if (!(nome.isBlank() && cognome.isBlank()))
+			this.email = nome.toLowerCase().charAt(0) + "." + cognome.toLowerCase() + "@solvingteam.it";
+		this.dataNascita = dataNascita;
+		this.dataAssunzione = dataAssunzione;
+		this.sesso = sesso;
+	}
+
 	public Dipendente(String nome, String cognome, String codFis, Date dataNascita, Sesso sesso) {
 		super();
 		this.nome = nome;
 		this.cognome = cognome;
 		this.codFis = codFis;
 		this.dataNascita = dataNascita;
+		this.sesso = sesso;
+	}
+
+	public Dipendente(String nome, String cognome, String codFis, Date dataNascita, Date dataAssunzione, Sesso sesso) {
+		super();
+		this.nome = nome;
+		this.cognome = cognome;
+		this.codFis = codFis;
+		this.dataNascita = dataNascita;
+		this.dataAssunzione = dataAssunzione;
 		this.sesso = sesso;
 	}
 

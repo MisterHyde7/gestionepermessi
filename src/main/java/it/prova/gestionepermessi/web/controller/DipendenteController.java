@@ -20,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import it.prova.gestionepermessi.dto.DipendenteDTO;
 import it.prova.gestionepermessi.model.Dipendente;
+import it.prova.gestionepermessi.model.Utente;
 import it.prova.gestionepermessi.service.DipendenteService;
 
 @Controller
@@ -57,9 +58,10 @@ public class DipendenteController {
 			return "dipendente/insert";
 		}
 		boolean hasPermessi = false;
-		if (dipendenteDTO.getPermessiIds().length != 0)
+		if (dipendenteDTO.getPermessiIds() != null && dipendenteDTO.getPermessiIds().length != 0)
 			hasPermessi = true;
-		dipendenteService.inserisciNuovo(dipendenteDTO.buildDipendenteModel(hasPermessi));
+		dipendenteService.inserisciNuovoConUtente(dipendenteDTO.buildDipendenteModel(hasPermessi),
+				new Utente(dipendenteDTO.getNome(), dipendenteDTO.getCognome()));
 
 		redirectAttrs.addFlashAttribute("successMessage", "Operazione eseguita correttamente");
 		return "redirect:/dipendente";
@@ -91,7 +93,10 @@ public class DipendenteController {
 
 	@GetMapping("/show/{idDipendente}")
 	public String showDipendente(@PathVariable(required = true) Long idDipendente, Model model) {
-		model.addAttribute("show_dipendente_attr", dipendenteService.caricaSingoloElemento(idDipendente));
+
+		Dipendente dipendentePerPagina = dipendenteService.caricaSingoloElemento(idDipendente);
+		model.addAttribute("show_dipendente_attr", dipendentePerPagina);
+		model.addAttribute("show_utente_attr", dipendentePerPagina.getUtente());
 		return "dipendente/show";
 	}
 

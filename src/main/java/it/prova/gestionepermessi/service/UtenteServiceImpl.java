@@ -18,8 +18,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import it.prova.gestionepermessi.model.Dipendente;
 import it.prova.gestionepermessi.model.StatoUtente;
 import it.prova.gestionepermessi.model.Utente;
+import it.prova.gestionepermessi.repository.dipendente.DipendenteRepository;
 import it.prova.gestionepermessi.repository.utente.UtenteRepository;
 
 @Service
@@ -29,8 +31,11 @@ public class UtenteServiceImpl implements UtenteService {
 	private UtenteRepository repository;
 
 	@Autowired
+	private DipendenteRepository dipendenteRepository;
+
+	@Autowired
 	private PasswordEncoder passwordEncoder;
-	
+
 	@Value("${resetPassword.password}")
 	private String resetPassword;
 
@@ -139,6 +144,17 @@ public class UtenteServiceImpl implements UtenteService {
 	@Transactional
 	public Utente findByUsername(String username) {
 		return repository.findByUsername(username).orElse(null);
+	}
+
+	@Transactional
+	public void inserisciNuovoConDipendente(Utente utenteInstance, Dipendente dipendenteInstance) {
+		utenteInstance.setStato(StatoUtente.CREATO);
+		utenteInstance.setPassword(passwordEncoder.encode(utenteInstance.getPassword()));
+		utenteInstance.setDateCreated(new Date());
+		utenteInstance.setDipendente(dipendenteInstance);
+		dipendenteInstance.setUtente(utenteInstance);
+		dipendenteRepository.save(dipendenteInstance);
+		repository.save(utenteInstance);
 	}
 
 }

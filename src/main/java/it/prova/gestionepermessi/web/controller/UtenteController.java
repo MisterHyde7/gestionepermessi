@@ -21,11 +21,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import it.prova.gestionepermessi.dto.RuoloDTO;
 import it.prova.gestionepermessi.dto.UtenteDTO;
+import it.prova.gestionepermessi.model.Dipendente;
 import it.prova.gestionepermessi.model.Utente;
 import it.prova.gestionepermessi.service.RuoloService;
 import it.prova.gestionepermessi.service.UtenteService;
 import it.prova.gestionepermessi.validation.ValidationNoPassword;
-import it.prova.gestionepermessi.validation.ValidationWithPassword;
 
 @Controller
 @RequestMapping(value = "/utente")
@@ -60,19 +60,15 @@ public class UtenteController {
 	}
 
 	@PostMapping("/save")
-	public String saveUtente(
-			@Validated({ ValidationWithPassword.class,
-					ValidationNoPassword.class }) @ModelAttribute("insert_utente_attr") UtenteDTO utenteDTO,
-			BindingResult result, Model model, RedirectAttributes redirectAttrs) {
-
-		if (!result.hasFieldErrors("password") && !utenteDTO.getPassword().equals(utenteDTO.getConfermaPassword()))
-			result.rejectValue("confermaPassword", "password.diverse");
+	public String saveUtente(@ModelAttribute("insert_utente_attr") UtenteDTO utenteDTO, BindingResult result,
+			Model model, RedirectAttributes redirectAttrs) {
 
 		if (result.hasErrors()) {
 			model.addAttribute("ruoli_totali_attr", RuoloDTO.createRuoloDTOListFromModelList(ruoloService.listAll()));
 			return "utente/insert";
 		}
-		utenteService.inserisciNuovo(utenteDTO.buildUtenteModel(true));
+		Dipendente dipendenteDaUtente = new Dipendente(utenteDTO.getNome(), utenteDTO.getCognome());
+		utenteService.inserisciNuovoConDipendente(utenteDTO.buildUtenteModel(true), dipendenteDaUtente);
 
 		redirectAttrs.addFlashAttribute("successMessage", "Operazione eseguita correttamente");
 		return "redirect:/utente";

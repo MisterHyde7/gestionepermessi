@@ -2,12 +2,10 @@ package it.prova.gestionepermessi.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -29,10 +27,6 @@ public class Messaggio {
 	@Column(name = "letto")
 	private boolean letto;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "utente_id", nullable = false)
-	private Utente utente;
-
 	@OneToOne
 	@JoinColumn(name = "permesso_id")
 	private RichiestaPermesso richiestaPermesso;
@@ -53,15 +47,6 @@ public class Messaggio {
 		this.testo = testo;
 		this.oggetto = oggetto;
 		this.letto = letto;
-	}
-
-	public Messaggio(Long id, String testo, String oggetto, boolean letto, Utente utente) {
-		super();
-		this.id = id;
-		this.testo = testo;
-		this.oggetto = oggetto;
-		this.letto = letto;
-		this.utente = utente;
 	}
 
 	public Long getId() {
@@ -94,14 +79,6 @@ public class Messaggio {
 
 	public void setLetto(boolean letto) {
 		this.letto = letto;
-	}
-
-	public Utente getUtente() {
-		return utente;
-	}
-
-	public void setUtente(Utente utente) {
-		this.utente = utente;
 	}
 
 	public RichiestaPermesso getRichiestaPermesso() {

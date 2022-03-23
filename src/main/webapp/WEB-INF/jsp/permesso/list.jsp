@@ -28,8 +28,8 @@
 			        <h5>Lista dei risultati</h5> 
 			    </div>
 			    <div class='card-body'>
-			    	<a class="btn btn-primary " href="${pageContext.request.contextPath}/utente/insert">Add New</a>
-			    	<a href="${pageContext.request.contextPath}/utente/search" class='btn btn-outline-secondary' >
+			    	<a class="btn btn-primary " href="${pageContext.request.contextPath}/permesso/insert">Add New</a>
+			    	<a href="${pageContext.request.contextPath}/permesso/search" class='btn btn-outline-secondary' >
 				            <i class='fa fa-chevron-left'></i> Torna alla Ricerca
 				        </a>
 			    
@@ -37,24 +37,25 @@
 			            <table class='table table-striped ' >
 			                <thead>
 			                    <tr>
-			                        <th>Nome</th>
-			                        <th>Cognome</th>
-			                        <th>Username</th>
-			                        <th>Stato</th>
+			                        <th>TipoPermesso</th>
+			                        <th>Data Inizio</th>
+			                        <th>Data Fine</th>
+			                        <th>Approvazione</th>
+			                        <th>Codice di Certificato</th>
 			                        <th>Azioni</th>
 			                    </tr>
 			                </thead>
 			                <tbody>
-			                	<c:forEach items="${utente_list_attribute }" var="utenteItem">
+			                	<c:forEach items="${permesso_list_attribute }" var="permessoItem">
 									<tr>
-										<td>${utenteItem.nome }</td>
-										<td>${utenteItem.cognome }</td>
-										<td>${utenteItem.username }</td>
-										<td>${utenteItem.stato }</td>
+										<td>${permessoItem.tipoPermesso }</td>
+										<td>${permessoItem.dataInizio }</td>
+										<td>${permessoItem.dataFine }</td>
+										<td>${permessoItem.approvato }</td>
+										<td>${permessoItem.codiceCertificato }</td>
 										<td>
-											<a class="btn btn-sm btn-outline-secondary" href="${pageContext.request.contextPath}/utente/show/${utenteItem.id }">Visualizza</a>
-											<a class="btn  btn-sm btn-outline-primary ml-2 mr-2" href="${pageContext.request.contextPath}/utente/edit/${utenteItem.id }">Edit</a>
-											<a id="changeStatoLink_#_${utenteItem.id }" class="btn btn-outline-${utenteItem.isAttivo()?'danger':'success'} btn-sm link-for-modal" data-bs-toggle="modal" data-bs-target="#confirmOperationModal"  >${utenteItem.isAttivo()?'Disabilita':'Abilita'}</a>
+											<a class="btn btn-sm btn-outline-secondary" href="${pageContext.request.contextPath}/permesso/show/${permessoItem.id }">Visualizza</a>
+											<a class="btn  btn-sm btn-outline-primary ml-2 mr-2" href="${pageContext.request.contextPath}/permesso/edit/${permessoItem.id }">Edit</a>
 										</td>
 									</tr>
 								</c:forEach>

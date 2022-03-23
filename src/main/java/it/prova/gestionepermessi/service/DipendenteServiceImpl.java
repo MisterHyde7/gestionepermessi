@@ -1,6 +1,7 @@
 package it.prova.gestionepermessi.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.criteria.Predicate;
@@ -12,16 +13,27 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import it.prova.gestionepermessi.model.Dipendente;
+import it.prova.gestionepermessi.model.StatoUtente;
+import it.prova.gestionepermessi.model.Utente;
 import it.prova.gestionepermessi.repository.dipendente.DipendenteRepository;
+import it.prova.gestionepermessi.repository.utente.UtenteRepository;
 
 @Service
 public class DipendenteServiceImpl implements DipendenteService {
 
 	@Autowired
 	private DipendenteRepository repository;
+
+	@Autowired
+	private UtenteRepository utenteRepository;
+
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
 	@Override
 	public List<Dipendente> listAll() {
@@ -50,6 +62,9 @@ public class DipendenteServiceImpl implements DipendenteService {
 
 	@Override
 	public void inserisciNuovo(Dipendente dipendenteInstance) {
+		Utente utenzaDelDipendente = new Utente(dipendenteInstance.getNome(), dipendenteInstance.getCognome());
+		utenteRepository.save(utenzaDelDipendente);
+		dipendenteInstance.setUtente(utenzaDelDipendente);
 		repository.save(dipendenteInstance);
 	}
 
@@ -97,5 +112,16 @@ public class DipendenteServiceImpl implements DipendenteService {
 			paging = PageRequest.of(pageNo, pageSize, Sort.by(sortBy));
 
 		return repository.findAll(specificationCriteria, paging);
+	}
+
+	@Transactional
+	public void inserisciNuovoConUtente(Dipendente dipendenteInstance, Utente utenteInstance) {
+		utenteInstance.setStato(StatoUtente.CREATO);
+		utenteInstance.setPassword(passwordEncoder.encode(utenteInstance.getPassword()));
+		utenteInstance.setDateCreated(new Date());
+		utenteInstance.setDipendente(dipendenteInstance);
+		dipendenteInstance.setUtente(utenteInstance);
+		repository.save(dipendenteInstance);
+		utenteRepository.save(utenteInstance);
 	}
 }

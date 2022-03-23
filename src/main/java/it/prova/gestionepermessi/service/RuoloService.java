@@ -5,6 +5,7 @@ import java.util.List;
 import it.prova.gestionepermessi.model.Ruolo;
 
 public interface RuoloService {
+	
 	public List<Ruolo> listAll() ;
 	
 	public Ruolo caricaSingoloElemento(Long id) ;

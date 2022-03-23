@@ -2,21 +2,19 @@ package it.prova.gestionepermessi.model;
 
 import java.util.Date;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -38,12 +36,12 @@ public class Utente {
 	@Column(name = "dateCreated")
 	private Date dateCreated;
 
+	@OneToOne(mappedBy = "utente")
+	private Dipendente dipendente;
+
 	// se non uso questa annotation viene gestito come un intero
 	@Enumerated(EnumType.STRING)
 	private StatoUtente stato;
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "utente")
-	private List<Messaggio> messaggi;
 
 	@ManyToMany
 	@JoinTable(name = "utente_ruolo", joinColumns = @JoinColumn(name = "utente_id", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "ruolo_id", referencedColumnName = "ID"))
@@ -52,10 +50,35 @@ public class Utente {
 	public Utente() {
 	}
 
-	public Utente(String username, String password) {
+	public Utente(String nome, String cognome) {
 		super();
-		this.username = username;
-		this.password = password;
+		this.nome = nome;
+		this.cognome = cognome;
+		if (!(nome.isBlank() && cognome.isBlank()))
+			this.username = nome.toLowerCase().charAt(0) + "." + cognome.toLowerCase();
+		this.password = "Password@01";
+		this.dateCreated = new Date();
+		this.stato = StatoUtente.CREATO;
+	}
+
+	public Utente(Long id, String nome, String cognome, StatoUtente stato) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.cognome = cognome;
+		if (!(nome.isBlank() && cognome.isBlank()))
+			this.username = nome.toLowerCase().charAt(0) + "." + cognome.toLowerCase();
+		this.password = "Password@01";
+		this.dateCreated = new Date();
+		this.stato = StatoUtente.CREATO;
+	}
+
+	public Utente(String nome, String cognome, Set<Ruolo> ruoli) {
+		super();
+		this.nome = nome;
+		this.cognome = cognome;
+		this.ruoli = ruoli;
+		this.username = nome.toLowerCase().charAt(0) + "." + cognome.toLowerCase();
 	}
 
 	public Utente(String username, String password, String nome, String cognome, Date dateCreated) {
@@ -74,19 +97,6 @@ public class Utente {
 		this.nome = nome;
 		this.cognome = cognome;
 		this.dateCreated = dateCreated;
-		this.stato = stato;
-	}
-
-	public Utente(Long id, String username, String password, String nome, String cognome, Date dateCreated,
-			List<Messaggio> messaggi, StatoUtente stato) {
-		super();
-		this.id = id;
-		this.username = username;
-		this.password = password;
-		this.nome = nome;
-		this.cognome = cognome;
-		this.dateCreated = dateCreated;
-		this.messaggi = messaggi;
 		this.stato = stato;
 	}
 
@@ -154,12 +164,20 @@ public class Utente {
 		this.stato = stato;
 	}
 
-	public List<Messaggio> getMessaggi() {
-		return messaggi;
+	public Dipendente getDipendente() {
+		return dipendente;
 	}
 
-	public void setMessaggi(List<Messaggio> messaggi) {
-		this.messaggi = messaggi;
+	public void setDipendente(Dipendente dipendente) {
+		this.dipendente = dipendente;
+	}
+
+	public boolean isBackOffice() {
+		for (Ruolo ruoloItem : ruoli) {
+			if (ruoloItem.getCodice().equals(Ruolo.ROLE_BO_USER))
+				return true;
+		}
+		return false;
 	}
 
 	public boolean isAdmin() {
