@@ -20,4 +20,6 @@ public interface MessaggioService {
 
 	public Page<Messaggio> findByExampleWithPagination(Messaggio buildMessaggioModel, Integer pageNo, Integer pageSize,
 			String sortBy);
+
+	public boolean listNonLetti();
 }

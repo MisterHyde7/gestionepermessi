@@ -82,4 +82,11 @@ public class MessaggioServiceImpl implements MessaggioService {
 		return repository.findAll(specificationCriteria, paging);
 	}
 
+	@Override
+	public boolean listNonLetti() {
+		if (repository.findByLetto(false) != null)
+			return true;
+		return false;
+	}
+
 }

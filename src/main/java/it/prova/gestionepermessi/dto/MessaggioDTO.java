@@ -7,6 +7,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import it.prova.gestionepermessi.model.Messaggio;
+import it.prova.gestionepermessi.model.RichiestaPermesso;
 
 public class MessaggioDTO {
 
@@ -21,7 +22,9 @@ public class MessaggioDTO {
 	@NotNull(message = "{letto.notblank}")
 	private boolean letto;
 
-	private UtenteDTO utenteDTO;
+	private RichiestaPermesso permesso;
+
+	private boolean approvato;
 
 	public MessaggioDTO() {
 		super();
@@ -50,6 +53,17 @@ public class MessaggioDTO {
 		this.testo = testo;
 		this.oggetto = oggetto;
 		this.letto = letto;
+	}
+
+	public MessaggioDTO(Long id, @NotBlank(message = "{testo.notblank}") String testo,
+			@NotBlank(message = "{oggetto.notblank}") String oggetto,
+			@NotNull(message = "{letto.notblank}") boolean letto, boolean approvato) {
+		super();
+		this.id = id;
+		this.testo = testo;
+		this.oggetto = oggetto;
+		this.letto = letto;
+		this.approvato = approvato;
 	}
 
 	public Long getId() {
@@ -84,12 +98,20 @@ public class MessaggioDTO {
 		this.letto = letto;
 	}
 
-	public UtenteDTO getUtente() {
-		return utenteDTO;
+	public RichiestaPermesso getPermesso() {
+		return permesso;
 	}
 
-	public void setUtente(UtenteDTO utenteDTO) {
-		this.utenteDTO = utenteDTO;
+	public void setPermesso(RichiestaPermesso permesso) {
+		this.permesso = permesso;
+	}
+
+	public boolean isApprovato() {
+		return approvato;
+	}
+
+	public void setApprovato(boolean approvato) {
+		this.approvato = approvato;
 	}
 
 	public Messaggio buildMessaggioModel() {
@@ -98,6 +120,13 @@ public class MessaggioDTO {
 	}
 
 	public static MessaggioDTO buildMessaggioDTOFromModel(Messaggio messaggioModel) {
+		MessaggioDTO result = new MessaggioDTO(messaggioModel.getId(), messaggioModel.getTesto(),
+				messaggioModel.getOggetto(), messaggioModel.isLetto());
+
+		return result;
+	}
+
+	public static MessaggioDTO buildMessaggioDTOFromModelWithPermesso(Messaggio messaggioModel) {
 		MessaggioDTO result = new MessaggioDTO(messaggioModel.getId(), messaggioModel.getTesto(),
 				messaggioModel.getOggetto(), messaggioModel.isLetto());
 

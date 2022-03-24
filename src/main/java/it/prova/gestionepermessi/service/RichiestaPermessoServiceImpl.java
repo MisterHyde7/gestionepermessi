@@ -16,9 +16,11 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import it.prova.gestionepermessi.model.Dipendente;
+import it.prova.gestionepermessi.model.Messaggio;
 import it.prova.gestionepermessi.model.RichiestaPermesso;
 import it.prova.gestionepermessi.model.Utente;
 import it.prova.gestionepermessi.repository.dipendente.DipendenteRepository;
+import it.prova.gestionepermessi.repository.messaggio.MessaggioRepository;
 import it.prova.gestionepermessi.repository.richiestapermesso.RichiestaPermessoRepository;
 import it.prova.gestionepermessi.repository.utente.UtenteRepository;
 
@@ -33,6 +35,9 @@ public class RichiestaPermessoServiceImpl implements RichiestaPermessoService {
 
 	@Autowired
 	private UtenteRepository utenteRepository;
+
+	@Autowired
+	private MessaggioRepository messaggioRepository;
 
 	@Override
 	public List<RichiestaPermesso> listAll() {
@@ -110,6 +115,11 @@ public class RichiestaPermessoServiceImpl implements RichiestaPermessoService {
 		Utente utente = utenteRepository.findByUsername(authentication.getName()).orElse(null);
 		Dipendente dipendente = dipendenteRepository.findByUtente_Id(utente.getId());
 		permessoInstance.setDipendente(dipendente);
+		Messaggio messaggio = new Messaggio("Nuova richiesta di " + permessoInstance.getTipoPermesso() + " da parte di "
+				+ dipendente.getNome() + " " + dipendente.getCognome(),
+				"Richiesta di " + permessoInstance.getTipoPermesso());
 		repository.save(permessoInstance);
+		messaggio.setRichiestaPermesso(permessoInstance);
+		messaggioRepository.save(messaggio);
 	}
 }

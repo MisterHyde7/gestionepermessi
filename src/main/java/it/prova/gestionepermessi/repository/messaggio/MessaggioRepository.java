@@ -8,4 +8,6 @@ import it.prova.gestionepermessi.model.Messaggio;
 public interface MessaggioRepository
 		extends PagingAndSortingRepository<Messaggio, Long>, JpaSpecificationExecutor<Messaggio> {
 
+	Messaggio findByLetto(boolean b);
+
 }

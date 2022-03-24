@@ -123,6 +123,7 @@ public class UtenteController {
 		boolean haRuoli = false;
 		if (utenteExample.getRuoliIds() != null)
 			haRuoli = true;
+		System.out.println(utenteExample.buildUtenteModel(haRuoli).getDateCreated());
 		List<Utente> utenti = utenteService
 				.findByExampleWithPagination(utenteExample.buildUtenteModel(haRuoli), pageNo, pageSize, sortBy)
 				.getContent();

@@ -1,4 +1,6 @@
 <!doctype html>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <html lang="it" class="h-100" >
 	 <head>
 	 
@@ -38,6 +40,32 @@
 	   		<!-- Fixed navbar -->
 	   		<jsp:include page="./navbar.jsp"></jsp:include>
 	    
+		    <sec:authorize access="hasRole('BO_USER')">
+		    	<c:if test="${messaggio_letto_attribute}">
+					
+					<div class="modal fade" id="confirmOperationModal" tabindex="-1"  aria-labelledby="confirmOperationModalLabel"
+					    aria-hidden="true">
+					    <div class="modal-dialog" >
+					        <div class="modal-content">
+					            <div class="modal-header">
+					                <h5 class="modal-title" id="confirmOperationModalLabel">Vai ai Messaggi</h5>
+								</div>
+					            <div class="modal-body">
+					               Ci sono nuovi messaggi da visualizzare
+					            </div>
+					            <form method="post" action="${pageContext.request.contextPath}/messaggio/list" >
+						       		<div class="modal-footer">
+						                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
+					          			<a class="btn btn-success" href="${pageContext.request.contextPath}/messaggio/listMessaggi">Visualizza</a>
+						        	</div>
+					            </form>
+					        </div>
+					    </div>
+					</div>
+					
+	
+		    	</c:if>
+			</sec:authorize>
 			
 			<!-- Begin page content -->
 			<main class="flex-shrink-0">
@@ -97,6 +125,17 @@
 			    </div>
 			  </div>
 			  
+			  <script type="text/javascript">
+			 	 var myModal = new bootstrap.Modal(document.getElementById('confirmOperationModal'))
+				 myModal.show(myModal)
+			  </script>
+			  
+					<!--  <script type="text/javascript">
+					$(document).ready(function(){
+						$('#confirmOperationModal').show()
+					})
+					</script>
+			  		-->
 			</main>
 			
 			<!-- Footer -->

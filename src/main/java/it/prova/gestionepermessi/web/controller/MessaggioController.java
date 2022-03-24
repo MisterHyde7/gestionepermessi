@@ -58,8 +58,8 @@ public class MessaggioController {
 
 	@GetMapping("/show/{idMessaggio}")
 	public String showMessaggio(@PathVariable(required = true) Long idMessaggio, Model model) {
-		model.addAttribute("show_messaggio_attr",
-				MessaggioDTO.buildMessaggioDTOFromModel(messaggioService.caricaSingoloElemento(idMessaggio)));
+		model.addAttribute("show_messaggio_attr", MessaggioDTO
+				.buildMessaggioDTOFromModelWithPermesso(messaggioService.caricaSingoloElemento(idMessaggio)));
 		return "messaggio/show";
 	}
 
@@ -101,4 +101,18 @@ public class MessaggioController {
 		redirectAttrs.addFlashAttribute("successMessage", "Operazione eseguita correttamente");
 		return "redirect:/messaggio";
 	}
+	
+	@GetMapping("/listMessaggi")
+	public String listMessaggi(@RequestParam(defaultValue = "0") Integer pageNo,
+			@RequestParam(defaultValue = "10") Integer pageSize, @RequestParam(defaultValue = "id") String sortBy,
+			ModelMap model) {
+
+		List<Messaggio> messaggi = messaggioService
+				.findByExampleWithPagination(new Messaggio(false), pageNo, pageSize, sortBy)
+				.getContent();
+
+		model.addAttribute("messaggio_list_attribute", MessaggioDTO.createMessaggioDTOListFromModelList(messaggi));
+		return "messaggio/list";
+	}
+	
 }

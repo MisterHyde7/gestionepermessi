@@ -57,7 +57,6 @@ public class RichiestaPermessoController {
 		if (result.hasErrors()) {
 			return "permesso/insert";
 		}
-		System.out.println(richiestaPermessoDTO.getTipoPermesso());
 		richiestaPermessoService.inserisciNuovoConDipendente(richiestaPermessoDTO.buildRichiestaPermessoModel(), SecurityContextHolder.getContext().getAuthentication());
 
 		redirectAttrs.addFlashAttribute("successMessage", "Operazione eseguita correttamente");
@@ -120,6 +119,28 @@ public class RichiestaPermessoController {
 
 		redirectAttrs.addFlashAttribute("successMessage", "Operazione eseguita correttamente");
 		return "redirect:/permesso";
+	}
+	
+	@GetMapping("/autorizza/{idPermesso}")
+	public String autorizzaPermesso(@PathVariable(required = true) Long idPermesso, RedirectAttributes redirectAttrs) {
+
+		RichiestaPermesso permesso = richiestaPermessoService.caricaSingoloElemento(idPermesso);
+		permesso.setApprovato(true);
+		richiestaPermessoService.aggiorna(permesso);
+
+		redirectAttrs.addFlashAttribute("successMessage", "Operazione eseguita correttamente");
+		return "redirect:/messaggio";
+	}
+	
+	@GetMapping("/nega/{idPermesso}")
+	public String negaPermesso(@PathVariable(required = true) Long idPermesso, RedirectAttributes redirectAttrs) {
+
+		RichiestaPermesso permesso = richiestaPermessoService.caricaSingoloElemento(idPermesso);
+		permesso.setApprovato(false);
+		richiestaPermessoService.aggiorna(permesso);
+
+		redirectAttrs.addFlashAttribute("successMessage", "Operazione eseguita correttamente");
+		return "redirect:/messaggio";
 	}
 
 }

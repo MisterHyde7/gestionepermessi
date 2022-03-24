@@ -42,7 +42,7 @@ public class SecSecurityConfig extends WebSecurityConfigurerAdapter {
          .antMatchers("/dipendente/list", "/dipendente/search", "/dipendente/show/**").hasAnyRole("ADMIN", "BO_USER")
          .antMatchers("/permesso/insert", "/permesso/edit", "/permesso/delete").hasAnyRole("DIPENDENTE_USER")
          .antMatchers("/dipendente/**").hasAnyRole("BO_USER")
-         .antMatchers("/utente/**").hasAnyRole("BO_USER", "ADMIN")
+         .antMatchers("/utente/**").hasAnyRole("ADMIN")
          .antMatchers("/permesso/**").hasAnyRole("BO_USER", "DIPENDENTE_USER")
          .antMatchers("/**").hasAnyRole("BO_USER", "ADMIN", "DIPENDENTE_USER")
          //.antMatchers("/anonymous*").anonymous()

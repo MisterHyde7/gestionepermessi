@@ -35,6 +35,11 @@ public class Messaggio {
 		super();
 	}
 
+	public Messaggio(boolean letto) {
+		super();
+		this.letto = letto;
+	}
+
 	public Messaggio(String testo, String oggetto) {
 		super();
 		this.testo = testo;

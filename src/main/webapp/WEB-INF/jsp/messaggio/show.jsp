@@ -42,39 +42,15 @@
 					  <dd class="col-sm-9">${show_messaggio_attr.letto}</dd>
 			    	</dl>
 					
-					<p>
-					  <a class="btn btn-primary btn-sm" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-					    Info Utente
-					  </a>
-					</p>
-					<div class="collapse" id="collapseExample">
-					  <div class="card card-body">
-					  	<dl class="row">
-						  <dt class="col-sm-3 text-right">Nome:</dt>
-						  <dd class="col-sm-9">${show_dipendente_attr.utente.nome}</dd>
-					   	</dl>
-					   	<dl class="row">
-						  <dt class="col-sm-3 text-right">Cognome:</dt>
-						  <dd class="col-sm-9">${show_dipendente_attr.utente.cognome}</dd>
-					   	</dl>
-					   	<dl class="row">
-						  <dt class="col-sm-3 text-right">Username:</dt>
-						  <dd class="col-sm-9">${show_dipendente_attr.utente.username}</dd>
-					   	</dl>
-					   	<dl class="row">
-						  <dt class="col-sm-3 text-right">Stato:</dt>
-						  <dd class="col-sm-9">${show_dipendente_attr.utente.stato}</dd>
-					   	</dl>
-					    
-					  </div>
-					
 			    <!-- end card body -->
 			    </div>
 			    
 			    <div class='card-footer'>
-			        <a href="${pageContext.request.contextPath }/utente/" class='btn btn-outline-secondary' style='width:80px'>
+			        <a href="${pageContext.request.contextPath}/messaggio/" class='btn btn-outline-secondary' style='width:80px'>
 			            <i class='fa fa-chevron-left'></i> Back
 			        </a>
+			        <a href="${pageContext.request.contextPath}/permesso/autorizza/${show_messaggio_attr.id}" class='btn btn-outline-success' style='width:100px'>Autorizza</a>
+			        <a href="${pageContext.request.contextPath}/permesso/nega/${show_messaggio_attr.id}" class='btn btn-outline-danger' style='width:80px'>Nega</a>
 			    </div>
 			<!-- end card -->
 			</div>	

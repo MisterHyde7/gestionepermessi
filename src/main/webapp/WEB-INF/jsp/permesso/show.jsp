@@ -70,24 +70,18 @@
 					  <div class="card card-body">
 					  	<dl class="row">
 						  <dt class="col-sm-3 text-right">Nome:</dt>
-						  <dd class="col-sm-9">${show_utente_attr.dipendente.nome}</dd>
+						  <dd class="col-sm-9">${show_permesso_attr.dipendente.nome}</dd>
 					   	</dl>
 					   	<dl class="row">
 						  <dt class="col-sm-3 text-right">Cognome:</dt>
-						  <dd class="col-sm-9">${show_utente_attr.dipendente.cognome}</dd>
+						  <dd class="col-sm-9">${show_permesso_attr.dipendente.cognome}</dd>
 					   	</dl>
-					   	<c:if test="${show_utente_attr.dipendente.codFis!=null}">
+					   	<c:if test="${show_permesso_attr.dipendente.codFis!=null}">
 						   	<dl class="row">
 							  <dt class="col-sm-3 text-right">CodiceFiscale:</dt>
-							  <dd class="col-sm-9">${show_utente_attr.dipendente.codFis}</dd>
+							  <dd class="col-sm-9">${show_permesso_attr.dipendente.codFis}</dd>
 						   	</dl>
 						</c:if>
-						<c:if test="${show_dipendente_attr.utente.email!=null}">
-						   	<dl class="row">
-							  <dt class="col-sm-3 text-right">Email:</dt>
-							  <dd class="col-sm-9">${show_dipendente_attr.utente.email}</dd>
-						   	</dl>
-					    </c:if>
 					  </div>
 					</div>
 					

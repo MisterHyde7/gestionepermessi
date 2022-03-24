@@ -69,7 +69,6 @@ public class Utente {
 		if (!(nome.isBlank() && cognome.isBlank()))
 			this.username = nome.toLowerCase().charAt(0) + "." + cognome.toLowerCase();
 		this.password = "Password@01";
-		this.dateCreated = new Date();
 		this.stato = StatoUtente.CREATO;
 	}
 
