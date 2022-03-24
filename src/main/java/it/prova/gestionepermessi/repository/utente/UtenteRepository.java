@@ -1,5 +1,6 @@
 package it.prova.gestionepermessi.repository.utente;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.EntityGraph;
@@ -23,5 +24,7 @@ public interface UtenteRepository extends PagingAndSortingRepository<Utente, Lon
 	//caricamento eager, ovviamente si può fare anche con jpql
 	@EntityGraph(attributePaths = { "ruoli" })
 	Utente findByUsernameAndPasswordAndStato(String username, String password, StatoUtente stato);
+
+	List<Utente> findByCognomeIgnoreCaseContainingOrNomeIgnoreCaseContainingOrderByNomeAsc(String term, String term2);
 	
 }

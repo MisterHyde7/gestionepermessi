@@ -157,4 +157,9 @@ public class UtenteServiceImpl implements UtenteService {
 		repository.save(utenteInstance);
 	}
 
+	@Override
+	public List<Utente> cercaByCognomeENomeILike(String term) {
+		return repository.findByCognomeIgnoreCaseContainingOrNomeIgnoreCaseContainingOrderByNomeAsc(term, term);
+	}
+
 }

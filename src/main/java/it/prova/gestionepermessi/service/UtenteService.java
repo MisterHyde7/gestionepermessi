@@ -33,4 +33,6 @@ public interface UtenteService {
 	
 	public void inserisciNuovoConDipendente(Utente utenteInstance, Dipendente dipendenteInstance);
 
+	public List<Utente> cercaByCognomeENomeILike(String term);
+
 }

@@ -3,9 +3,9 @@
 <html lang="it" class="h-100" >
 <head>
 	<jsp:include page="../header.jsp" />
+	<link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/jqueryUI/jquery-ui.min.css" />
 	<title>Ricerca</title>
 	
-    
 </head>
 <body class="d-flex flex-column h-100">
 	<!-- Fixed navbar -->
@@ -28,58 +28,70 @@
 			    </div>
 			    <div class='card-body'>
 	
-						<form method="post" action="${pageContext.request.contextPath}/utente/list" class="row g-3">
+						<form method="post" action="${pageContext.request.contextPath}/messaggio/list" class="row g-3">
 						
 							<div class="col-md-6">
-								<label for="nome" class="form-label">Nome</label>
-								<input type="text" name="nome" id="nome" class="form-control" placeholder="Inserire il nome" >
+								<label for="oggetto" class="form-label">Oggetto</label>
+								<input type="text" name="oggetto" id="oggetto" class="form-control" placeholder="Inserire l'oggetto" >
 							</div>
 							
 							<div class="col-md-6">
-								<label for="cognome" class="form-label">Cognome</label>
-								<input type="text" name="cognome" id="cognome" class="form-control" placeholder="Inserire il cognome" >
+								<label for="letto" class="form-label">Letto</label>
+								<select class="form-select " id="letto" name="letto" >
+								   	<option value="" selected> - Selezionare - </option>
+								   	<option value=TRUE>LETTO</option>
+								   	<option value=FALSE>DA LEGGERE</option>
+							    </select>
 							</div>
 							
 							<div class="col-md-6">
-								<label for="username" class="form-label">Username</label>
-								<input type="text" class="form-control" name="username" id="username" placeholder="Inserire username" >
-							</div>
-							<div class="col-md-6">
-								<label for="dateCreated" class="form-label">Data di Creazione</label>
-                        		<input class="form-control" id="dateCreated" type="date" placeholder="dd/MM/yy"
-                            		title="formato : gg/mm/aaaa"  name="dateCreated" >
-							</div>
-							
-							<div class="col-md-6">
-								<label for="stato" class="form-label">Stato</label>
-								    <select class="form-select " id="stato" name="stato" >
-								    	<option value="" selected> - Selezionare - </option>
-								      	<option value="ATTIVO" >ATTIVO</option>
-								    	<option value="CREATO">CREATO</option>
-								      	<option value="DISABILITATO" >DISABILITATO</option>
-							    	</select>
-							</div>
-							
-							<div class="col-md-6 form-check">
-								<p>Ruoli:</p>
-								<c:forEach items="${ruoli}" var="ruoloEntry">
-									<div class="form-check">
-										  <input class="form-check-input" name="ruoloEntry" type="checkbox" value="${ruoloEntry.id}" id="ruoloEntry${ruoloEntry.codice }">
-										  <label class="form-check-label" for="ruoloEntry${ruoloEntry.codice }" >
-										    ${ruoloEntry.codice}
-										  </label>
-									</div>
-								  </c:forEach>
+								<label for="utenteSearchInput" class="form-label">Utente:</label>
+									<input class="form-control ${status.error ? 'is-invalid' : ''}" type="text" id="utenteSearchInput"
+									name="utenteInput" value="${insert_messaggio_attr.utente.nome}${empty insert_messaggio_attr.utente.nome?'':' '}${insert_messaggio_attr.utente.cognome}">
+								<input type="hidden" name="utente.id" id="utenteId" value="${insert_messaggio_attr.utente.id}">
 							</div>
 							
 							<div class="col-12">	
 								<button type="submit" name="submit" value="submit" id="submit" class="btn btn-primary">Conferma</button>
 								<input class="btn btn-outline-warning" type="reset" value="Ripulisci">
-								<a class="btn btn-outline-primary ml-2" href="${pageContext.request.contextPath}/utente/insert">Add New</a>
 							</div>
 	
 							
 						</form>
+						
+						<script>
+									$("#utenteSearchInput").autocomplete({
+										 source: function(request, response) {
+										        $.ajax({
+										            url: "../utente/searchUtentiAjax",
+										            datatype: "json",
+										            data: {
+										                term: request.term,   
+										            },
+										            success: function(data) {
+										                response($.map(data, function(item) {
+										                    return {
+											                    label: item.label,
+											                    value: item.value
+										                    }
+										                }))
+										            }
+										        })
+										    },
+										//quando seleziono la voce nel campo deve valorizzarsi la descrizione
+									    focus: function(event, ui) {
+									        $("#utenteSearchInput").val(ui.item.label)
+									        return false
+									    },
+									    minLength: 2,
+									    //quando seleziono la voce nel campo hidden deve valorizzarsi l'id
+									    select: function( event, ui ) {
+									    	$('#utenteId').val(ui.item.value);
+									    	//console.log($('#registaId').val())
+									        return false;
+									    }
+									});
+								</script>
 			    
 				<!-- end card-body -->			   
 			    </div>

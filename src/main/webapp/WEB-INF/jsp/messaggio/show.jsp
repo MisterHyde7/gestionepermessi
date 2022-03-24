@@ -24,64 +24,49 @@
 			    <div class='card-body'>
 			    	<dl class="row">
 					  <dt class="col-sm-3 text-right">Id:</dt>
-					  <dd class="col-sm-9">${show_utente_attr.id}</dd>
+					  <dd class="col-sm-9">${show_messaggio_attr.id}</dd>
 			    	</dl>
 			    	
 			    	<dl class="row">
-					  <dt class="col-sm-3 text-right">Username:</dt>
-					  <dd class="col-sm-9">${show_utente_attr.username}</dd>
+					  <dt class="col-sm-3 text-right">Oggetto:</dt>
+					  <dd class="col-sm-9">${show_messaggio_attr.oggetto}</dd>
 			    	</dl>
 			    	
 			    	<dl class="row">
-					  <dt class="col-sm-3 text-right">Nome:</dt>
-					  <dd class="col-sm-9">${show_utente_attr.nome}</dd>
+					  <dt class="col-sm-3 text-right">Testo:</dt>
+					  <dd class="col-sm-9">${show_messaggio_attr.testo}</dd>
 			    	</dl>
 			    	
 			    	<dl class="row">
-					  <dt class="col-sm-3 text-right">Cognome:</dt>
-					  <dd class="col-sm-9">${show_utente_attr.cognome}</dd>
+					  <dt class="col-sm-3 text-right">Letto:</dt>
+					  <dd class="col-sm-9">${show_messaggio_attr.letto}</dd>
 			    	</dl>
-			    	
-			    	<dl class="row">
-					  <dt class="col-sm-3 text-right">Data Creazione:</dt>
-					  <dd class="col-sm-9"><fmt:formatDate type = "date" value = "${show_utente_attr.dateCreated}" /></dd>
-			    	</dl>
-			    	
-			    	<ul class="list-group">
-			    		<c:forEach items="${show_utente_attr.ruoli}" var="ruoloItem">
-			    			<li class="list-group-item">${ruoloItem.codice}</li>
-			    		</c:forEach>
-					</ul>
 					
 					<p>
 					  <a class="btn btn-primary btn-sm" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-					    Info Dipendente
+					    Info Utente
 					  </a>
 					</p>
 					<div class="collapse" id="collapseExample">
 					  <div class="card card-body">
 					  	<dl class="row">
 						  <dt class="col-sm-3 text-right">Nome:</dt>
-						  <dd class="col-sm-9">${show_utente_attr.dipendente.nome}</dd>
+						  <dd class="col-sm-9">${show_dipendente_attr.utente.nome}</dd>
 					   	</dl>
 					   	<dl class="row">
 						  <dt class="col-sm-3 text-right">Cognome:</dt>
-						  <dd class="col-sm-9">${show_utente_attr.dipendente.cognome}</dd>
+						  <dd class="col-sm-9">${show_dipendente_attr.utente.cognome}</dd>
 					   	</dl>
-					   	<c:if test="${show_utente_attr.dipendente.codFis!=null}">
-						   	<dl class="row">
-							  <dt class="col-sm-3 text-right">CodiceFiscale:</dt>
-							  <dd class="col-sm-9">${show_utente_attr.dipendente.codFis}</dd>
-						   	</dl>
-						</c:if>
-						<c:if test="${show_dipendente_attr.utente.email!=null}">
-						   	<dl class="row">
-							  <dt class="col-sm-3 text-right">Email:</dt>
-							  <dd class="col-sm-9">${show_dipendente_attr.utente.email}</dd>
-						   	</dl>
-					    </c:if>
+					   	<dl class="row">
+						  <dt class="col-sm-3 text-right">Username:</dt>
+						  <dd class="col-sm-9">${show_dipendente_attr.utente.username}</dd>
+					   	</dl>
+					   	<dl class="row">
+						  <dt class="col-sm-3 text-right">Stato:</dt>
+						  <dd class="col-sm-9">${show_dipendente_attr.utente.stato}</dd>
+					   	</dl>
+					    
 					  </div>
-					</div>
 					
 			    <!-- end card body -->
 			    </div>

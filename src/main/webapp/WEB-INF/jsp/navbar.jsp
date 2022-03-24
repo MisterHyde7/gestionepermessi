@@ -37,6 +37,7 @@
 		          <a class="dropdown-item" href="${pageContext.request.contextPath}/dipendente/search">Ricerca Dipendenti</a>
 		          <a class="dropdown-item" href="${pageContext.request.contextPath}/dipendente/insert">Inserisci Dipendente</a>
 		          <a class="dropdown-item" href="${pageContext.request.contextPath}/permesso/search">Ricerca Permessi</a>
+		          <a class="dropdown-item" href="${pageContext.request.contextPath}/messaggio/search">Ricerca Messaggi</a>
 		        </div>
 		      </li>
 		   </sec:authorize>
