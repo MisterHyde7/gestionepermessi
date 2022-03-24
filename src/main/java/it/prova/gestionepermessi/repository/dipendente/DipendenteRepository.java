@@ -8,4 +8,6 @@ import it.prova.gestionepermessi.model.Dipendente;
 public interface DipendenteRepository
 		extends PagingAndSortingRepository<Dipendente, Long>, JpaSpecificationExecutor<Dipendente> {
 
+	Dipendente findByUtente_Id(Long id);
+
 }

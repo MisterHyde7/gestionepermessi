@@ -36,6 +36,16 @@
 		          <a class="dropdown-item" href="${pageContext.request.contextPath}/utente/insert">Inserisci Utente</a>
 		          <a class="dropdown-item" href="${pageContext.request.contextPath}/dipendente/search">Ricerca Dipendenti</a>
 		          <a class="dropdown-item" href="${pageContext.request.contextPath}/dipendente/insert">Inserisci Dipendente</a>
+		          <a class="dropdown-item" href="${pageContext.request.contextPath}/permesso/search">Ricerca Permessi</a>
+		        </div>
+		      </li>
+		   </sec:authorize>
+		    <sec:authorize access="hasRole('DIPENDENTE_USER')">
+		      <li class="nav-item dropdown">
+		        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Gestione Dati Personali</a>
+		        <div class="dropdown-menu" aria-labelledby="dropdown01">
+		          <a class="dropdown-item" href="${pageContext.request.contextPath}/permesso/search">Ricerca Permessi</a>
+		          <a class="dropdown-item" href="${pageContext.request.contextPath}/permesso/insert">Inserisci Permesso</a>
 		        </div>
 		      </li>
 		   </sec:authorize>

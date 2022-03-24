@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -56,7 +57,8 @@ public class RichiestaPermessoController {
 		if (result.hasErrors()) {
 			return "permesso/insert";
 		}
-		richiestaPermessoService.inserisciNuovo(richiestaPermessoDTO.buildRichiestaPermessoModel());
+		System.out.println(richiestaPermessoDTO.getTipoPermesso());
+		richiestaPermessoService.inserisciNuovoConDipendente(richiestaPermessoDTO.buildRichiestaPermessoModel(), SecurityContextHolder.getContext().getAuthentication());
 
 		redirectAttrs.addFlashAttribute("successMessage", "Operazione eseguita correttamente");
 		return "redirect:/permesso";
@@ -101,6 +103,23 @@ public class RichiestaPermessoController {
 		model.addAttribute("permesso_list_attribute",
 				RichiestaPermessoDTO.createRichiestaPermessoListFromModelList(permessi));
 		return "permesso/list";
+	}
+	
+	@GetMapping("/delete/{idPermesso}")
+	public String deletePermesso(@PathVariable(required = true) Long idPermesso, Model model,
+			RedirectAttributes redirectAttrs) {
+
+		model.addAttribute("delete_permesso_attr", richiestaPermessoService.caricaSingoloElemento(idPermesso));
+		return "permesso/delete";
+	}
+
+	@GetMapping("/remove/{idPermesso}")
+	public String removePermesso(@PathVariable(required = true) Long idPermesso, RedirectAttributes redirectAttrs) {
+
+		richiestaPermessoService.rimuovi(richiestaPermessoService.caricaSingoloElemento(idPermesso));
+
+		redirectAttrs.addFlashAttribute("successMessage", "Operazione eseguita correttamente");
+		return "redirect:/permesso";
 	}
 
 }

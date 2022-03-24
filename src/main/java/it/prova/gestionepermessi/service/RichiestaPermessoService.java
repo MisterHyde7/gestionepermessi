@@ -3,6 +3,7 @@ package it.prova.gestionepermessi.service;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
+import org.springframework.security.core.Authentication;
 
 import it.prova.gestionepermessi.model.RichiestaPermesso;
 
@@ -20,4 +21,7 @@ public interface RichiestaPermessoService {
 
 	public Page<RichiestaPermesso> findByExampleWithPagination(RichiestaPermesso buildRichiestaPermessoModel,
 			Integer pageNo, Integer pageSize, String sortBy);
+
+	public void inserisciNuovoConDipendente(RichiestaPermesso buildRichiestaPermessoModel,
+			Authentication authentication);
 }

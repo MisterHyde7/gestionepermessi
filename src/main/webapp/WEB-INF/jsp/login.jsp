@@ -30,11 +30,11 @@
 		    	
 		    	
 			  	<div class="form-floating">
-			      <input type="text" name="username" class="form-control" id="inputUsername" placeholder="username" value="admin">
+			      <input type="text" name="username" class="form-control" id="inputUsername" placeholder="username" value="backoffice">
 			      <label for="inputUsername">Username</label>
 			    </div>
 			    <div class="form-floating">
-			      <input type="password" name="password" class="form-control" id="inputPassword" placeholder="Password" value="admin">
+			      <input type="password" name="password" class="form-control" id="inputPassword" placeholder="Password" value="backoffice">
 			      <label for="inputPassword">Password</label>
 			    </div>
 			

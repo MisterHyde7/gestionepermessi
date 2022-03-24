@@ -1,6 +1,7 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!doctype html>
 <html lang="it" class="h-100" >
 	 <head>
@@ -51,7 +52,7 @@
 								<div class="col-md-6">
 									<label for="tipoPermesso" class="form-label">Tipo di Permesso <span class="text-danger">*</span></label>
 								    <spring:bind path="tipoPermesso">
-										<select class="form-select ${status.error ? 'is-invalid' : ''}" id="sesso" name="sesso" required>
+										<select class="form-select ${status.error ? 'is-invalid' : ''}" id="tipoPermesso" name="tipoPermesso" required>
 										    <option value="" selected> - Selezionare - </option>
 										    <option value="FERIE" ${insert_permesso_attr.tipoPermesso == 'FERIE'?'selected':''} >FERIE</option>
 										    <option value="MALATTIA" ${insert_permesso_attr.tipoPermesso == 'MALATTIA'?'selected':''} >MALATTIA</option>
@@ -59,8 +60,16 @@
 								    </spring:bind>
 								    <form:errors  path="tipoPermesso" cssClass="error_field" />
 								</div>
+								<%-- 
+								<script type="text/javascript">
+									$(document).ready(function() {
+										$('#tipoPermesso').click(function(){
+											
+										})
+									});
+								</script> --%>
 								
-								<fmt:formatDate pattern='yyyy-MM-dd' var="parsedDate" type='date' value='${insert_permesso_attr.dataAssunzione}' />
+								<fmt:formatDate pattern='yyyy-MM-dd' var="parsedDate" type='date' value='${insert_permesso_attr.dataInizio}' />
 								<div class="col-md-6">
 									<label for="dataInizio" class="form-label">Data di Inizio <span class="text-danger">*</span></label>
                         			<spring:bind path="dataInizio">
@@ -71,7 +80,7 @@
 	                            	<form:errors  path="dataInizio" cssClass="error_field" />
 								</div>
 								
-								<fmt:formatDate pattern='yyyy-MM-dd' var="parsedDate" type='date' value='${insert_permesso_attr.dataAssunzione}' />
+								<fmt:formatDate pattern='yyyy-MM-dd' var="parsedDate" type='date' value='${insert_permesso_attr.dataFine}' />
 								<div class="col-md-6">
 									<label for="dataFine" class="form-label">Data di Fine <span class="text-danger">*</span></label>
                         			<spring:bind path="dataFine">
@@ -80,18 +89,6 @@
 	                            		value="${parsedDate}" >
 		                            </spring:bind>
 	                            	<form:errors  path="dataFine" cssClass="error_field" />
-								</div>
-								
-								<div class="col-md-6">
-									<label for="tipoPermesso" class="form-label">Approvazione <span class="text-danger">*</span></label>
-								    <spring:bind path="tipoPermesso">
-									    <select class="form-select ${status.error ? 'is-invalid' : ''}" id="tipoPermesso" name="tipoPermesso" required>
-									    	<option value="" selected> - Selezionare - </option>
-									      	<option value="true" >ACCETTATO</option>
-									      	<option value="false" >RIFIUTATO</option>
-									    </select>
-								    </spring:bind>
-								    <form:errors  path="tipoPermesso" cssClass="error_field" />
 								</div>
 								
 								<div class="col-md-6">
@@ -116,8 +113,6 @@
 								</div>
 		
 						</form:form>
-  
-				    
 				    
 					<!-- end card-body -->			   
 				    </div>

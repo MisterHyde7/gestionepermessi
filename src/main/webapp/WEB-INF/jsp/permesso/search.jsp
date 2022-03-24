@@ -31,21 +31,21 @@
 						<form method="post" action="${pageContext.request.contextPath}/permesso/list" class="row g-3">
 							
 							<div class="col-md-6">
-								<label for="sesso" class="form-label">Tipo di Permesso</label>
-								<select class="form-select ${status.error ? 'is-invalid' : ''}" id="sesso" name="sesso" required>
+								<label for="tipoPermesso" class="form-label">Tipo di Permesso</label>
+								<select class="form-select ${status.error ? 'is-invalid' : ''}" id="tipoPermesso" name="tipoPermesso" required>
 								    <option value="" selected> - Selezionare - </option>
 								    <option value="FERIE" ${insert_permesso_attr.tipoPermesso == 'FERIE'?'selected':''} >FERIE</option>
 								    <option value="MALATTIA" ${insert_permesso_attr.tipoPermesso == 'MALATTIA'?'selected':''} >MALATTIA</option>
 								</select>
 							</div>
 							
-							<div class="col-md-4">
+							<div class="col-md-6">
 								<label for="dataInizio" class="form-label">Data di Inizio</label>
                         		<input class="form-control" id="dataInizio" type="date" placeholder="dd/MM/yy"
                             		title="formato : gg/mm/aaaa"  name="dataInizio" >
 							</div>
 							
-							<div class="col-md-4">
+							<div class="col-md-6">
 								<label for="dataFine" class="form-label">Data di Fine</label>
                         		<input class="form-control" id="dataFine" type="date" placeholder="dd/MM/yy"
                             		title="formato : gg/mm/aaaa"  name="dataFine" >
@@ -55,8 +55,8 @@
 								<label for="approvato" class="form-label">Approvazione</label>
 								<select class="form-select ${status.error ? 'is-invalid' : ''}" id="approvato" name="approvato" required>
 								    <option value="" selected> - Selezionare - </option>
-								    <option value="true" >ACCETTATO</option>
-								    <option value="false" >RIFIUTATO</option>
+								    <option value=TRUE >ACCETTATO</option>
+								    <option value=FALSE >RIFIUTATO</option>
 								</select>
 							</div>
 							

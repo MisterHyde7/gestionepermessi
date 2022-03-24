@@ -41,7 +41,6 @@
 			                        <th>Data Inizio</th>
 			                        <th>Data Fine</th>
 			                        <th>Approvazione</th>
-			                        <th>Codice di Certificato</th>
 			                        <th>Azioni</th>
 			                    </tr>
 			                </thead>
@@ -52,10 +51,10 @@
 										<td>${permessoItem.dataInizio }</td>
 										<td>${permessoItem.dataFine }</td>
 										<td>${permessoItem.approvato }</td>
-										<td>${permessoItem.codiceCertificato }</td>
 										<td>
 											<a class="btn btn-sm btn-outline-secondary" href="${pageContext.request.contextPath}/permesso/show/${permessoItem.id }">Visualizza</a>
 											<a class="btn  btn-sm btn-outline-primary ml-2 mr-2" href="${pageContext.request.contextPath}/permesso/edit/${permessoItem.id }">Edit</a>
+											<a class="btn  btn-sm btn-outline-danger ml-2 mr-2" href="${pageContext.request.contextPath}/permesso/delete/${permessoItem.id }">Delete</a>
 										</td>
 									</tr>
 								</c:forEach>

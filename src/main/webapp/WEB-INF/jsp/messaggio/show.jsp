@@ -24,44 +24,36 @@
 			    <div class='card-body'>
 			    	<dl class="row">
 					  <dt class="col-sm-3 text-right">Id:</dt>
-					  <dd class="col-sm-9">${show_permesso_attr.id}</dd>
+					  <dd class="col-sm-9">${show_utente_attr.id}</dd>
 			    	</dl>
 			    	
 			    	<dl class="row">
-					  <dt class="col-sm-3 text-right">Tipo di Permesso:</dt>
-					  <dd class="col-sm-9">${show_permesso_attr.tipoPermesso}</dd>
+					  <dt class="col-sm-3 text-right">Username:</dt>
+					  <dd class="col-sm-9">${show_utente_attr.username}</dd>
 			    	</dl>
 			    	
 			    	<dl class="row">
-					  <dt class="col-sm-3 text-right">Data di Inizio:</dt>
-					  <dd class="col-sm-9"><fmt:formatDate type = "date" value = "${show_permesso_attr.dataInizio}" /></dd>
+					  <dt class="col-sm-3 text-right">Nome:</dt>
+					  <dd class="col-sm-9">${show_utente_attr.nome}</dd>
 			    	</dl>
 			    	
 			    	<dl class="row">
-					  <dt class="col-sm-3 text-right">Data di Fine:</dt>
-					  <dd class="col-sm-9"><fmt:formatDate type = "date" value = "${show_permesso_attr.dataFine}" /></dd>
+					  <dt class="col-sm-3 text-right">Cognome:</dt>
+					  <dd class="col-sm-9">${show_utente_attr.cognome}</dd>
 			    	</dl>
 			    	
 			    	<dl class="row">
-					  <dt class="col-sm-3 text-right">Approvato:</dt>
-					  <dd class="col-sm-9">${show_permesso_attr.approvato}</dd>
+					  <dt class="col-sm-3 text-right">Data Creazione:</dt>
+					  <dd class="col-sm-9"><fmt:formatDate type = "date" value = "${show_utente_attr.dateCreated}" /></dd>
 			    	</dl>
 			    	
-			    	<c:if test="${show_permesso_attr.tipoPermesso == 'MALATTIA'}">
-				    	<dl class="row">
-						  <dt class="col-sm-3 text-right">Codice di Certificato:</dt>
-						  <dd class="col-sm-9">${show_permesso_attr.codiceCertificato}</dd>
-				    	</dl>
-			    	</c:if>
-			    	
-			    	<c:if test="${show_permesso_attr.note!=null}">
-				    	<dl class="row">
-						  <dt class="col-sm-3 text-right">Note:</dt>
-						  <dd class="col-sm-9"><fmt:formatDate type = "date" value = "${show_permesso_attr.note}" /></dd>
-				    	</dl>
-			    	</c:if>
-			    	
-			    	<p>
+			    	<ul class="list-group">
+			    		<c:forEach items="${show_utente_attr.ruoli}" var="ruoloItem">
+			    			<li class="list-group-item">${ruoloItem.codice}</li>
+			    		</c:forEach>
+					</ul>
+					
+					<p>
 					  <a class="btn btn-primary btn-sm" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
 					    Info Dipendente
 					  </a>
@@ -95,7 +87,7 @@
 			    </div>
 			    
 			    <div class='card-footer'>
-			        <a href="${pageContext.request.contextPath }/permesso/" class='btn btn-outline-secondary' style='width:80px'>
+			        <a href="${pageContext.request.contextPath }/utente/" class='btn btn-outline-secondary' style='width:80px'>
 			            <i class='fa fa-chevron-left'></i> Back
 			        </a>
 			    </div>

@@ -12,16 +12,27 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
+import it.prova.gestionepermessi.model.Dipendente;
 import it.prova.gestionepermessi.model.RichiestaPermesso;
+import it.prova.gestionepermessi.model.Utente;
+import it.prova.gestionepermessi.repository.dipendente.DipendenteRepository;
 import it.prova.gestionepermessi.repository.richiestapermesso.RichiestaPermessoRepository;
+import it.prova.gestionepermessi.repository.utente.UtenteRepository;
 
 @Service
 public class RichiestaPermessoServiceImpl implements RichiestaPermessoService {
 
 	@Autowired
 	private RichiestaPermessoRepository repository;
+
+	@Autowired
+	private DipendenteRepository dipendenteRepository;
+
+	@Autowired
+	private UtenteRepository utenteRepository;
 
 	@Override
 	public List<RichiestaPermesso> listAll() {
@@ -64,8 +75,7 @@ public class RichiestaPermessoServiceImpl implements RichiestaPermessoService {
 
 			List<Predicate> predicates = new ArrayList<Predicate>();
 
-			if (StringUtils.isNotEmpty(example.getTipoPermesso().toString()))
-				predicates.add(cb.like(cb.upper(root.get("tipoPermesso")), example.getTipoPermesso().toString()));
+			predicates.add(cb.equal(cb.upper(root.get("tipoPermesso")), example.getTipoPermesso()));
 
 			if (example.getDataInizio() != null)
 				predicates.add(cb.greaterThanOrEqualTo(root.get("dataInizio"), example.getDataInizio()));
@@ -93,5 +103,13 @@ public class RichiestaPermessoServiceImpl implements RichiestaPermessoService {
 			paging = PageRequest.of(pageNo, pageSize, Sort.by(sortBy));
 
 		return repository.findAll(specificationCriteria, paging);
+	}
+
+	@Override
+	public void inserisciNuovoConDipendente(RichiestaPermesso permessoInstance, Authentication authentication) {
+		Utente utente = utenteRepository.findByUsername(authentication.getName()).orElse(null);
+		Dipendente dipendente = dipendenteRepository.findByUtente_Id(utente.getId());
+		permessoInstance.setDipendente(dipendente);
+		repository.save(permessoInstance);
 	}
 }
