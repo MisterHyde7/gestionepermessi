@@ -24,7 +24,7 @@ public class RichiestaPermessoDTO {
 	@NotNull(message = "{dataFine.notblank}")
 	private Date dataFine;
 
-	private boolean approvato;
+	private Boolean approvato;
 
 	@NotBlank(message = "{codiceCertificato.notblank}")
 	private String codiceCertificato;
@@ -41,7 +41,7 @@ public class RichiestaPermessoDTO {
 
 	public RichiestaPermessoDTO(@NotBlank(message = "{tipoPermesso.notblank}") TipoPermesso tipoPermesso,
 			@NotNull(message = "{dataInizio.notblank}") Date dataInizio,
-			@NotNull(message = "{dataFine.notblank}") Date dataFine, boolean approvato,
+			@NotNull(message = "{dataFine.notblank}") Date dataFine, Boolean approvato,
 			@NotBlank(message = "{codiceCertificato.notblank}") String codiceCertificato) {
 		super();
 		this.tipoPermesso = tipoPermesso;
@@ -53,7 +53,7 @@ public class RichiestaPermessoDTO {
 
 	public RichiestaPermessoDTO(@NotBlank(message = "{tipoPermesso.notblank}") TipoPermesso tipoPermesso,
 			@NotNull(message = "{dataInizio.notblank}") Date dataInizio,
-			@NotNull(message = "{dataFine.notblank}") Date dataFine, boolean approvato,
+			@NotNull(message = "{dataFine.notblank}") Date dataFine, Boolean approvato,
 			@NotBlank(message = "{codiceCertificato.notblank}") String codiceCertificato, String note) {
 		super();
 		this.tipoPermesso = tipoPermesso;
@@ -66,7 +66,7 @@ public class RichiestaPermessoDTO {
 
 	public RichiestaPermessoDTO(Long id, @NotBlank(message = "{tipoPermesso.notblank}") TipoPermesso tipoPermesso,
 			@NotNull(message = "{dataInizio.notblank}") Date dataInizio,
-			@NotNull(message = "{dataFine.notblank}") Date dataFine, boolean approvato,
+			@NotNull(message = "{dataFine.notblank}") Date dataFine, Boolean approvato,
 			@NotBlank(message = "{codiceCertificato.notblank}") String codiceCertificato, String note) {
 		super();
 		this.id = id;
@@ -110,11 +110,11 @@ public class RichiestaPermessoDTO {
 		this.dataFine = dataFine;
 	}
 
-	public boolean isApprovato() {
+	public Boolean isApprovato() {
 		return approvato;
 	}
 
-	public void setApprovato(boolean approvato) {
+	public void setApprovato(Boolean approvato) {
 		this.approvato = approvato;
 	}
 

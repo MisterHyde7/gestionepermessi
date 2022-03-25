@@ -28,7 +28,7 @@ public class RichiestaPermesso {
 	@Column(name = "dataFine")
 	private Date dataFine;
 	@Column(name = "approvato")
-	private boolean approvato;
+	private Boolean approvato;
 	@Column(name = "codiceCertificato")
 	private String codiceCertificato;
 	@Column(name = "note")
@@ -51,7 +51,7 @@ public class RichiestaPermesso {
 		this.id = id;
 	}
 
-	public RichiestaPermesso(Long id, TipoPermesso tipoPermesso, Date dataInizio, Date dataFine, boolean approvato,
+	public RichiestaPermesso(Long id, TipoPermesso tipoPermesso, Date dataInizio, Date dataFine, Boolean approvato,
 			String codiceCertificato, String note) {
 		super();
 		this.id = id;
@@ -85,7 +85,7 @@ public class RichiestaPermesso {
 		this.dipendente = dipendente;
 	}
 
-	public RichiestaPermesso(Long id, TipoPermesso tipoPermesso, Date dataInizio, Date dataFine, boolean approvato,
+	public RichiestaPermesso(Long id, TipoPermesso tipoPermesso, Date dataInizio, Date dataFine, Boolean approvato,
 			String codiceCertificato, String note, Attachment attachment, Dipendente dipendente) {
 		super();
 		this.id = id;
@@ -131,11 +131,11 @@ public class RichiestaPermesso {
 		this.dataFine = dataFine;
 	}
 
-	public boolean isApprovato() {
+	public Boolean isApprovato() {
 		return approvato;
 	}
 
-	public void setApprovato(boolean approvato) {
+	public void setApprovato(Boolean approvato) {
 		this.approvato = approvato;
 	}
 

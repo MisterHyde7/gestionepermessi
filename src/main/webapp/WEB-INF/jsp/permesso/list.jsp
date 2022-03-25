@@ -1,5 +1,6 @@
 <%@page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!doctype html>
 <html lang="it" class="h-100">
 <head>
@@ -40,7 +41,6 @@
 			                        <th>TipoPermesso</th>
 			                        <th>Data Inizio</th>
 			                        <th>Data Fine</th>
-			                        <th>Approvazione</th>
 			                        <th>Azioni</th>
 			                    </tr>
 			                </thead>
@@ -48,9 +48,13 @@
 			                	<c:forEach items="${permesso_list_attribute }" var="permessoItem">
 									<tr>
 										<td>${permessoItem.tipoPermesso }</td>
-										<td>${permessoItem.dataInizio }</td>
-										<td>${permessoItem.dataFine }</td>
-										<td>${permessoItem.approvato }</td>
+										<td><fmt:formatDate type = "date" value = "${permessoItem.dataInizio }" /></td>
+										<c:if test="${permessoItem.dataFine!=null }">
+											<td><fmt:formatDate type = "date" value = "${permessoItem.dataFine }" /></td>
+			                        	</c:if>
+			                        	<c:if test="${permessoItem.dataFine==null }">
+											<td>Data da Definire</td>
+			                        	</c:if>
 										<td>
 											<a class="btn btn-sm btn-outline-secondary" href="${pageContext.request.contextPath}/permesso/show/${permessoItem.id }">Visualizza</a>
 											<a class="btn  btn-sm btn-outline-primary ml-2 mr-2" href="${pageContext.request.contextPath}/permesso/edit/${permessoItem.id }">Edit</a>

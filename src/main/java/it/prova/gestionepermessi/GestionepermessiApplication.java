@@ -45,7 +45,7 @@ public class GestionepermessiApplication implements CommandLineRunner {
 		// anche per password ogni volta ne inserisce uno nuovo, inoltre l'encode della
 		// password non lo
 		// faccio qui perche gia lo fa il service di utente, durante inserisciNuovo
-		if (utenteServiceInstance.findByUsername("admin") == null) {
+		if (utenteServiceInstance.findByUsername("M.Rossi") == null) {
 			Utente admin = new Utente("admin", "admin", "Mario", "Rossi", new Date());
 			admin.getRuoli().add(ruoloServiceInstance.cercaPerDescrizioneECodice("Administrator", "ROLE_ADMIN"));
 			Dipendente dipendente = new Dipendente("Mario", "Rossi", "asdqwertyzxc", new Date(), new Date(),
@@ -57,7 +57,7 @@ public class GestionepermessiApplication implements CommandLineRunner {
 			utenteServiceInstance.changeUserAbilitation(admin.getId());
 		}
 
-		if (utenteServiceInstance.findByUsername("backoffice") == null) {
+		if (utenteServiceInstance.findByUsername("L.Martucci") == null) {
 			Utente backoffice = new Utente("backoffice", "backoffice", "Luca", "Martucci", new Date());
 			backoffice.getRuoli().add(ruoloServiceInstance.cercaPerDescrizioneECodice("BackOffice", "ROLE_BO_USER"));
 			Dipendente dipendente = new Dipendente("Luca", "Martucci", "asdqwertyzxc", new Date(), new Date(),

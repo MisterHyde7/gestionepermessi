@@ -81,7 +81,8 @@ public class RichiestaPermessoServiceImpl implements RichiestaPermessoService {
 
 			List<Predicate> predicates = new ArrayList<Predicate>();
 
-			predicates.add(cb.equal(cb.upper(root.get("tipoPermesso")), example.getTipoPermesso()));
+			if (example.getTipoPermesso() != null)
+				predicates.add(cb.equal(cb.upper(root.get("tipoPermesso")), example.getTipoPermesso()));
 
 			if (example.getDataInizio() != null)
 				predicates.add(cb.greaterThanOrEqualTo(root.get("dataInizio"), example.getDataInizio()));
@@ -89,7 +90,8 @@ public class RichiestaPermessoServiceImpl implements RichiestaPermessoService {
 			if (example.getDataFine() != null)
 				predicates.add(cb.greaterThanOrEqualTo(root.get("dataFine"), example.getDataFine()));
 
-			predicates.add(cb.equal(cb.upper(root.get("approvato")), example.isApprovato()));
+			if (example.isApprovato() != null)
+				predicates.add(cb.equal(root.get("approvato"), example.isApprovato()));
 
 			if (StringUtils.isNotEmpty(example.getCodiceCertificato()))
 				predicates.add(cb.like(cb.upper(root.get("codiceCertificato")),
