@@ -20,11 +20,11 @@ public class MessaggioDTO {
 	private String oggetto;
 
 	@NotNull(message = "{letto.notblank}")
-	private boolean letto;
+	private Boolean letto;
 
 	private RichiestaPermesso permesso;
 
-	private boolean approvato;
+	private Boolean approvato;
 
 	public MessaggioDTO() {
 		super();
@@ -47,7 +47,7 @@ public class MessaggioDTO {
 
 	public MessaggioDTO(Long id, @NotBlank(message = "{testo.notblank}") String testo,
 			@NotBlank(message = "{oggetto.notblank}") String oggetto,
-			@NotNull(message = "{letto.notblank}") boolean letto) {
+			@NotNull(message = "{letto.notblank}") Boolean letto) {
 		super();
 		this.id = id;
 		this.testo = testo;
@@ -57,7 +57,7 @@ public class MessaggioDTO {
 
 	public MessaggioDTO(Long id, @NotBlank(message = "{testo.notblank}") String testo,
 			@NotBlank(message = "{oggetto.notblank}") String oggetto,
-			@NotNull(message = "{letto.notblank}") boolean letto, boolean approvato) {
+			@NotNull(message = "{letto.notblank}") Boolean letto, Boolean approvato) {
 		super();
 		this.id = id;
 		this.testo = testo;
@@ -90,11 +90,11 @@ public class MessaggioDTO {
 		this.oggetto = oggetto;
 	}
 
-	public boolean isLetto() {
+	public Boolean isLetto() {
 		return letto;
 	}
 
-	public void setLetto(boolean letto) {
+	public void setLetto(Boolean letto) {
 		this.letto = letto;
 	}
 
@@ -106,11 +106,11 @@ public class MessaggioDTO {
 		this.permesso = permesso;
 	}
 
-	public boolean isApprovato() {
+	public Boolean isApprovato() {
 		return approvato;
 	}
 
-	public void setApprovato(boolean approvato) {
+	public void setApprovato(Boolean approvato) {
 		this.approvato = approvato;
 	}
 

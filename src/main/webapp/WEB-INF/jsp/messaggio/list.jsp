@@ -45,7 +45,12 @@
 			                	<c:forEach items="${messaggio_list_attribute }" var="messaggioItem">
 									<tr>
 										<td>${messaggioItem.oggetto }</td>
-										<td>${messaggioItem.letto }</td>
+										<c:if test="${messaggioItem.isLetto()}">
+											<td>Messaggio Letto</td>
+										</c:if>
+										<c:if test="${!messaggioItem.isLetto()}">
+											<td>Messaggio Da Leggere</td>
+										</c:if>
 										<td>
 											<a class="btn btn-sm btn-outline-secondary" href="${pageContext.request.contextPath}/messaggio/show/${messaggioItem.id }">Visualizza</a>
 										</td>

@@ -67,7 +67,8 @@ public class MessaggioServiceImpl implements MessaggioService {
 			if (StringUtils.isNotEmpty(example.getOggetto()))
 				predicates.add(cb.like(cb.upper(root.get("oggetto")), "%" + example.getOggetto().toUpperCase() + "%"));
 
-			predicates.add(cb.equal(cb.upper(root.get("letto")), example.isLetto()));
+			if (example.isLetto() != null)
+				predicates.add(cb.equal(root.get("letto"), example.isLetto()));
 
 			return cb.and(predicates.toArray(new Predicate[predicates.size()]));
 		};
@@ -84,9 +85,14 @@ public class MessaggioServiceImpl implements MessaggioService {
 
 	@Override
 	public boolean listNonLetti() {
-		if (repository.findByLetto(false) != null)
+		if (repository.findAllByLetto(false).size() > 0)
 			return true;
 		return false;
+	}
+
+	@Override
+	public Messaggio caricaSingoloElementoConIdPermesso(Long idPermesso) {
+		return repository.findByRichiestaPermesso_Id(idPermesso);
 	}
 
 }

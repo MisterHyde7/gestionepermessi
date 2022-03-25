@@ -51,12 +51,12 @@
 					    	
 					    	<dl class="row">
 							  <dt class="col-sm-3 text-right">Approvato:</dt>
-							  <dd class="col-sm-9">${delete_permesso_attr.approvato}</dd>
+							  <dd class="col-sm-9">${delete_permesso_attr.isApprovato()}</dd>
 					    	</dl>
 					    	
-					    	<c:if test="${delete_permesso_attr.codiceCertificato!=null}">
+					    	<c:if test="${!delete_permesso_attr.codiceCertificato.isBlank()}">
 						    	<dl class="row">
-								  <dt class="col-sm-3 text-right">Approvato:</dt>
+								  <dt class="col-sm-3 text-right">Codice Certificato:</dt>
 								  <dd class="col-sm-9">${delete_permesso_attr.codiceCertificato}</dd>
 						    	</dl>
 					    	</c:if>

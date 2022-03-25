@@ -24,7 +24,6 @@
 				  ${infoMessage}
 				</div>
 				
-				
 			  	<img class="mb-4" src="./assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
 				<h1 class="h3 mb-3 fw-normal">Please sign in</h1>
 		    	
@@ -34,7 +33,7 @@
 			      <label for="inputUsername">Username</label>
 			    </div>
 			    <div class="form-floating">
-			      <input type="password" name="password" class="form-control" id="inputPassword" placeholder="Password" value="backoffice">
+			      <input type="password" name="password" class="form-control" id="inputPassword" placeholder="Password" value="Password@01">
 			      <label for="inputPassword">Password</label>
 			    </div>
 			

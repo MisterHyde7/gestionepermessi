@@ -22,4 +22,6 @@ public interface MessaggioService {
 			String sortBy);
 
 	public boolean listNonLetti();
+
+	public Messaggio caricaSingoloElementoConIdPermesso(Long idPermesso);
 }

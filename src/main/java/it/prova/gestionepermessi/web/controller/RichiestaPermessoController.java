@@ -20,7 +20,9 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import it.prova.gestionepermessi.dto.RichiestaPermessoDTO;
+import it.prova.gestionepermessi.model.Messaggio;
 import it.prova.gestionepermessi.model.RichiestaPermesso;
+import it.prova.gestionepermessi.service.MessaggioService;
 import it.prova.gestionepermessi.service.RichiestaPermessoService;
 
 @Controller
@@ -29,6 +31,9 @@ public class RichiestaPermessoController {
 
 	@Autowired
 	private RichiestaPermessoService richiestaPermessoService;
+
+	@Autowired
+	private MessaggioService messaggioService;
 
 	@GetMapping
 	public ModelAndView listAllPermessi() {
@@ -116,7 +121,10 @@ public class RichiestaPermessoController {
 	@GetMapping("/remove/{idPermesso}")
 	public String removePermesso(@PathVariable(required = true) Long idPermesso, RedirectAttributes redirectAttrs) {
 
-		richiestaPermessoService.rimuovi(richiestaPermessoService.caricaSingoloElemento(idPermesso));
+		RichiestaPermesso permesso = richiestaPermessoService.caricaSingoloElemento(idPermesso);
+		Messaggio msg = messaggioService.caricaSingoloElementoConIdPermesso(idPermesso);
+		messaggioService.rimuovi(msg);
+		richiestaPermessoService.rimuovi(permesso);
 
 		redirectAttrs.addFlashAttribute("successMessage", "Operazione eseguita correttamente");
 		return "redirect:/permesso";

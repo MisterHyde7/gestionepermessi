@@ -39,7 +39,7 @@
 			    	
 			    	<dl class="row">
 					  <dt class="col-sm-3 text-right">Letto:</dt>
-					  <dd class="col-sm-9">${show_messaggio_attr.letto}</dd>
+					  <dd class="col-sm-9">Messaggio Letto</dd>
 			    	</dl>
 					
 			    <!-- end card body -->

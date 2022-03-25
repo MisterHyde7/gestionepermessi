@@ -25,7 +25,7 @@ public class Messaggio {
 	private String oggetto;
 
 	@Column(name = "letto")
-	private boolean letto;
+	private Boolean letto;
 
 	@OneToOne
 	@JoinColumn(name = "permesso_id")
@@ -35,7 +35,7 @@ public class Messaggio {
 		super();
 	}
 
-	public Messaggio(boolean letto) {
+	public Messaggio(Boolean letto) {
 		super();
 		this.letto = letto;
 	}
@@ -46,7 +46,7 @@ public class Messaggio {
 		this.oggetto = oggetto;
 	}
 
-	public Messaggio(Long id, String testo, String oggetto, boolean letto) {
+	public Messaggio(Long id, String testo, String oggetto, Boolean letto) {
 		super();
 		this.id = id;
 		this.testo = testo;
@@ -78,11 +78,11 @@ public class Messaggio {
 		this.oggetto = oggetto;
 	}
 
-	public boolean isLetto() {
+	public Boolean isLetto() {
 		return letto;
 	}
 
-	public void setLetto(boolean letto) {
+	public void setLetto(Boolean letto) {
 		this.letto = letto;
 	}
 
