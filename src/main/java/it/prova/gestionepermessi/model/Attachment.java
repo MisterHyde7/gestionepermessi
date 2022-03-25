@@ -26,10 +26,10 @@ public class Attachment {
 
 	@Lob
 	private byte[] payload;
-	
+
 	@OneToOne
 	private RichiestaPermesso richiestaPermesso;
-	
+
 	public Attachment() {
 	}
 
@@ -79,6 +79,14 @@ public class Attachment {
 
 	public void setPayload(byte[] payload) {
 		this.payload = payload;
+	}
+
+	public RichiestaPermesso getRichiestaPermesso() {
+		return richiestaPermesso;
+	}
+
+	public void setRichiestaPermesso(RichiestaPermesso richiestaPermesso) {
+		this.richiestaPermesso = richiestaPermesso;
 	}
 
 }

@@ -10,6 +10,6 @@ import it.prova.gestionepermessi.model.RichiestaPermesso;
 public interface RichiestaPermessoRepository
 		extends PagingAndSortingRepository<RichiestaPermesso, Long>, JpaSpecificationExecutor<RichiestaPermesso> {
 
-	Optional<RichiestaPermesso> findByIdAndAttachment_Id(Long idPermesso, Long idLong);
+	Optional<RichiestaPermesso> findByAttachment_RichiestaPermesso_id(Long idPermesso);
 
 }

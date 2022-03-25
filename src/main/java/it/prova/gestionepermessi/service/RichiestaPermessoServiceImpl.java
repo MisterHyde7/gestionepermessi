@@ -128,7 +128,7 @@ public class RichiestaPermessoServiceImpl implements RichiestaPermessoService {
 
 	@Override
 	public RichiestaPermesso caricaSingoloElementoConFile(Long idPermesso) {
-		return repository.findByIdAndAttachment_Id(idPermesso, idPermesso).orElse(null);
+		return repository.findByAttachment_RichiestaPermesso_id(idPermesso).orElse(null);
 	}
 
 	@Override

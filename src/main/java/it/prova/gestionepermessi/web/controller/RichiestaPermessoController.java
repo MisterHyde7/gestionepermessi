@@ -1,5 +1,6 @@
 package it.prova.gestionepermessi.web.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,12 +17,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import it.prova.gestionepermessi.dto.RichiestaPermessoDTO;
+import it.prova.gestionepermessi.model.Attachment;
 import it.prova.gestionepermessi.model.Messaggio;
 import it.prova.gestionepermessi.model.RichiestaPermesso;
+import it.prova.gestionepermessi.service.AttachmentService;
 import it.prova.gestionepermessi.service.MessaggioService;
 import it.prova.gestionepermessi.service.RichiestaPermessoService;
 
@@ -34,6 +38,9 @@ public class RichiestaPermessoController {
 
 	@Autowired
 	private MessaggioService messaggioService;
+
+	@Autowired
+	private AttachmentService attachmentService;
 
 	@GetMapping
 	public ModelAndView listAllPermessi() {
@@ -56,14 +63,27 @@ public class RichiestaPermessoController {
 	}
 
 	@PostMapping("/save")
-	public String savePermesso(@ModelAttribute("insert_permesso_attr") RichiestaPermessoDTO richiestaPermessoDTO,
-			BindingResult result, Model model, RedirectAttributes redirectAttrs) {
+	public String savePermesso(@RequestParam("file") MultipartFile file, Attachment attachment,
+			@ModelAttribute("insert_permesso_attr") RichiestaPermessoDTO richiestaPermessoDTO, BindingResult result,
+			Model model, RedirectAttributes redirectAttrs) {
 
 		if (result.hasErrors()) {
 			return "permesso/insert";
 		}
-		richiestaPermessoService.inserisciNuovoConDipendente(richiestaPermessoDTO.buildRichiestaPermessoModel(),
+		RichiestaPermesso permesso = richiestaPermessoDTO.buildRichiestaPermessoModel();
+		richiestaPermessoService.inserisciNuovoConDipendente(permesso,
 				SecurityContextHolder.getContext().getAuthentication());
+		try {
+			attachment.setContentType(file.getContentType());
+			attachment.setNomeFile(file.getOriginalFilename());
+			attachment.setPayload(file.getBytes());
+			attachment
+					.setRichiestaPermesso(richiestaPermessoService.caricaSingoloElemento(permesso.getId()));
+		} catch (IOException e) {
+			throw new RuntimeException("Problema nell'upload file", e);
+		}
+
+		attachmentService.inserisciNuovo(attachment);
 
 		redirectAttrs.addFlashAttribute("successMessage", "Operazione eseguita correttamente");
 		return "redirect:/permesso";
@@ -92,7 +112,7 @@ public class RichiestaPermessoController {
 
 	@GetMapping("/show/{idPermesso}")
 	public String showPermesso(@PathVariable(required = true) Long idPermesso, Model model) {
-		model.addAttribute("show_permesso_attr", richiestaPermessoService.caricaSingoloElementoConFile(idPermesso));
+		model.addAttribute("show_permesso_attr", richiestaPermessoService.caricaSingoloElemento(idPermesso));
 		return "permesso/show";
 	}
 

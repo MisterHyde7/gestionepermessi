@@ -85,9 +85,7 @@ public class MessaggioServiceImpl implements MessaggioService {
 
 	@Override
 	public boolean listNonLetti() {
-		if (repository.findAllByLetto(false).size() > 0)
-			return true;
-		return false;
+		return repository.findAllByLetto(false).size() > 0;
 	}
 
 	@Override

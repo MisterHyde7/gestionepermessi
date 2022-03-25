@@ -43,11 +43,13 @@
 						  <dd class="col-sm-9"><fmt:formatDate type = "date" value = "${show_permesso_attr.dataFine}" /></dd>
 				    	</dl>
 			    	</c:if>
-			    	
-			    	<dl class="row">
-					  <dt class="col-sm-3 text-right">Approvato:</dt>
-					  <dd class="col-sm-9">${show_permesso_attr.approvato}</dd>
-			    	</dl>
+										
+					<c:if test="${messaggioItem.isApprovato()}">
+			    	  <dl class="row">
+					    <dt class="col-sm-3 text-right">Approvato:</dt>
+						<dd class="col-sm-9">Richiesta Approvata</dd>
+			    	  </dl>
+			    	</c:if>
 			    	
 			    	<c:if test="${show_permesso_attr.tipoPermesso == 'MALATTIA'}">
 				    	<dl class="row">
