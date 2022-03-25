@@ -15,6 +15,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
+import it.prova.gestionepermessi.model.Attachment;
 import it.prova.gestionepermessi.model.Dipendente;
 import it.prova.gestionepermessi.model.Messaggio;
 import it.prova.gestionepermessi.model.RichiestaPermesso;
@@ -118,6 +119,27 @@ public class RichiestaPermessoServiceImpl implements RichiestaPermessoService {
 		Messaggio messaggio = new Messaggio("Nuova richiesta di " + permessoInstance.getTipoPermesso() + " da parte di "
 				+ dipendente.getNome() + " " + dipendente.getCognome(),
 				"Richiesta di " + permessoInstance.getTipoPermesso());
+		repository.save(permessoInstance);
+		messaggio.setRichiestaPermesso(permessoInstance);
+		messaggioRepository.save(messaggio);
+	}
+
+	@Override
+	public RichiestaPermesso caricaSingoloElementoConFile(Long idPermesso) {
+		return repository.findByIdAndAttachment_Id(idPermesso, idPermesso).orElse(null);
+	}
+
+	@Override
+	public void inserisciNuovoConDipendenteEFile(RichiestaPermesso permessoInstance, Authentication authentication,
+			Attachment attachment) {
+		Utente utente = utenteRepository.findByUsername(authentication.getName()).orElse(null);
+		Dipendente dipendente = dipendenteRepository.findByUtente_Id(utente.getId());
+		permessoInstance.setDipendente(dipendente);
+		Messaggio messaggio = new Messaggio("Nuova richiesta di " + permessoInstance.getTipoPermesso() + " da parte di "
+				+ dipendente.getNome() + " " + dipendente.getCognome(),
+				"Richiesta di " + permessoInstance.getTipoPermesso());
+		if (attachment != null)
+			permessoInstance.setAttachment(attachment);
 		repository.save(permessoInstance);
 		messaggio.setRichiestaPermesso(permessoInstance);
 		messaggioRepository.save(messaggio);

@@ -57,7 +57,8 @@ public class RichiestaPermessoController {
 		if (result.hasErrors()) {
 			return "permesso/insert";
 		}
-		richiestaPermessoService.inserisciNuovoConDipendente(richiestaPermessoDTO.buildRichiestaPermessoModel(), SecurityContextHolder.getContext().getAuthentication());
+		richiestaPermessoService.inserisciNuovoConDipendente(richiestaPermessoDTO.buildRichiestaPermessoModel(),
+				SecurityContextHolder.getContext().getAuthentication());
 
 		redirectAttrs.addFlashAttribute("successMessage", "Operazione eseguita correttamente");
 		return "redirect:/permesso";
@@ -86,7 +87,7 @@ public class RichiestaPermessoController {
 
 	@GetMapping("/show/{idPermesso}")
 	public String showPermesso(@PathVariable(required = true) Long idPermesso, Model model) {
-		model.addAttribute("show_permesso_attr", richiestaPermessoService.caricaSingoloElemento(idPermesso));
+		model.addAttribute("show_permesso_attr", richiestaPermessoService.caricaSingoloElementoConFile(idPermesso));
 		return "permesso/show";
 	}
 
@@ -103,7 +104,7 @@ public class RichiestaPermessoController {
 				RichiestaPermessoDTO.createRichiestaPermessoListFromModelList(permessi));
 		return "permesso/list";
 	}
-	
+
 	@GetMapping("/delete/{idPermesso}")
 	public String deletePermesso(@PathVariable(required = true) Long idPermesso, Model model,
 			RedirectAttributes redirectAttrs) {
@@ -120,7 +121,7 @@ public class RichiestaPermessoController {
 		redirectAttrs.addFlashAttribute("successMessage", "Operazione eseguita correttamente");
 		return "redirect:/permesso";
 	}
-	
+
 	@GetMapping("/autorizza/{idPermesso}")
 	public String autorizzaPermesso(@PathVariable(required = true) Long idPermesso, RedirectAttributes redirectAttrs) {
 
@@ -131,7 +132,7 @@ public class RichiestaPermessoController {
 		redirectAttrs.addFlashAttribute("successMessage", "Operazione eseguita correttamente");
 		return "redirect:/messaggio";
 	}
-	
+
 	@GetMapping("/nega/{idPermesso}")
 	public String negaPermesso(@PathVariable(required = true) Long idPermesso, RedirectAttributes redirectAttrs) {
 

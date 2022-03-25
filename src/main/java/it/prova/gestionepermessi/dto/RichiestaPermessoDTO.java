@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import it.prova.gestionepermessi.model.Attachment;
 import it.prova.gestionepermessi.model.RichiestaPermesso;
 import it.prova.gestionepermessi.model.TipoPermesso;
 
@@ -23,7 +24,6 @@ public class RichiestaPermessoDTO {
 	@NotNull(message = "{dataFine.notblank}")
 	private Date dataFine;
 
-	@NotNull(message = "{approvato.notblank}")
 	private boolean approvato;
 
 	@NotBlank(message = "{codiceCertificato.notblank}")
@@ -33,14 +33,15 @@ public class RichiestaPermessoDTO {
 
 	private DipendenteDTO dipendenteDTO;
 
+	private Attachment attachment;
+
 	public RichiestaPermessoDTO() {
 		super();
 	}
 
 	public RichiestaPermessoDTO(@NotBlank(message = "{tipoPermesso.notblank}") TipoPermesso tipoPermesso,
 			@NotNull(message = "{dataInizio.notblank}") Date dataInizio,
-			@NotNull(message = "{dataFine.notblank}") Date dataFine,
-			@NotNull(message = "{approvato.notblank}") boolean approvato,
+			@NotNull(message = "{dataFine.notblank}") Date dataFine, boolean approvato,
 			@NotBlank(message = "{codiceCertificato.notblank}") String codiceCertificato) {
 		super();
 		this.tipoPermesso = tipoPermesso;
@@ -52,8 +53,7 @@ public class RichiestaPermessoDTO {
 
 	public RichiestaPermessoDTO(@NotBlank(message = "{tipoPermesso.notblank}") TipoPermesso tipoPermesso,
 			@NotNull(message = "{dataInizio.notblank}") Date dataInizio,
-			@NotNull(message = "{dataFine.notblank}") Date dataFine,
-			@NotNull(message = "{approvato.notblank}") boolean approvato,
+			@NotNull(message = "{dataFine.notblank}") Date dataFine, boolean approvato,
 			@NotBlank(message = "{codiceCertificato.notblank}") String codiceCertificato, String note) {
 		super();
 		this.tipoPermesso = tipoPermesso;
@@ -66,8 +66,7 @@ public class RichiestaPermessoDTO {
 
 	public RichiestaPermessoDTO(Long id, @NotBlank(message = "{tipoPermesso.notblank}") TipoPermesso tipoPermesso,
 			@NotNull(message = "{dataInizio.notblank}") Date dataInizio,
-			@NotNull(message = "{dataFine.notblank}") Date dataFine,
-			@NotNull(message = "{approvato.notblank}") boolean approvato,
+			@NotNull(message = "{dataFine.notblank}") Date dataFine, boolean approvato,
 			@NotBlank(message = "{codiceCertificato.notblank}") String codiceCertificato, String note) {
 		super();
 		this.id = id;
@@ -141,6 +140,14 @@ public class RichiestaPermessoDTO {
 
 	public void setDipendenteDTO(DipendenteDTO dipendenteDTO) {
 		this.dipendenteDTO = dipendenteDTO;
+	}
+
+	public Attachment getAttachment() {
+		return attachment;
+	}
+
+	public void setAttachment(Attachment attachment) {
+		this.attachment = attachment;
 	}
 
 	public RichiestaPermesso buildRichiestaPermessoModel() {

@@ -32,7 +32,7 @@
 							
 							<div class="col-md-6">
 								<label for="tipoPermesso" class="form-label">Tipo di Permesso</label>
-								<select class="form-select ${status.error ? 'is-invalid' : ''}" id="tipoPermesso" name="tipoPermesso" required>
+								<select class="form-select ${status.error ? 'is-invalid' : ''}" id="tipoPermesso" name="tipoPermesso">
 								    <option value="" selected> - Selezionare - </option>
 								    <option value="FERIE" ${insert_permesso_attr.tipoPermesso == 'FERIE'?'selected':''} >FERIE</option>
 								    <option value="MALATTIA" ${insert_permesso_attr.tipoPermesso == 'MALATTIA'?'selected':''} >MALATTIA</option>
@@ -53,7 +53,7 @@
 							
 							<div class="col-md-6">
 								<label for="approvato" class="form-label">Approvazione</label>
-								<select class="form-select ${status.error ? 'is-invalid' : ''}" id="approvato" name="approvato" required>
+								<select class="form-select ${status.error ? 'is-invalid' : ''}" id="approvato" name="approvato">
 								    <option value="" selected> - Selezionare - </option>
 								    <option value=TRUE >ACCETTATO</option>
 								    <option value=FALSE >RIFIUTATO</option>

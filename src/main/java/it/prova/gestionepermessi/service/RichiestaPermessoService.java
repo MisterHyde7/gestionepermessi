@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.security.core.Authentication;
 
+import it.prova.gestionepermessi.model.Attachment;
 import it.prova.gestionepermessi.model.RichiestaPermesso;
 
 public interface RichiestaPermessoService {
@@ -24,4 +25,9 @@ public interface RichiestaPermessoService {
 
 	public void inserisciNuovoConDipendente(RichiestaPermesso buildRichiestaPermessoModel,
 			Authentication authentication);
+
+	public RichiestaPermesso caricaSingoloElementoConFile(Long idPermesso);
+
+	public void inserisciNuovoConDipendenteEFile(RichiestaPermesso buildRichiestaPermessoModel,
+			Authentication authentication, Attachment attachment);
 }

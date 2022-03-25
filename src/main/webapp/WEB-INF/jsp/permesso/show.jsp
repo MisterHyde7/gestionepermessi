@@ -37,10 +37,12 @@
 					  <dd class="col-sm-9"><fmt:formatDate type = "date" value = "${show_permesso_attr.dataInizio}" /></dd>
 			    	</dl>
 			    	
-			    	<dl class="row">
-					  <dt class="col-sm-3 text-right">Data di Fine:</dt>
-					  <dd class="col-sm-9"><fmt:formatDate type = "date" value = "${show_permesso_attr.dataFine}" /></dd>
-			    	</dl>
+			    	<c:if test="${show_permesso_attr.dataFine!=null}">
+				    	<dl class="row">
+						  <dt class="col-sm-3 text-right">Data di Fine:</dt>
+						  <dd class="col-sm-9"><fmt:formatDate type = "date" value = "${show_permesso_attr.dataFine}" /></dd>
+				    	</dl>
+			    	</c:if>
 			    	
 			    	<dl class="row">
 					  <dt class="col-sm-3 text-right">Approvato:</dt>
@@ -54,10 +56,17 @@
 				    	</dl>
 			    	</c:if>
 			    	
-			    	<c:if test="${show_permesso_attr.note!=null}">
+			    	<c:if test="${show_permesso_attr.note!=''}">
 				    	<dl class="row">
 						  <dt class="col-sm-3 text-right">Note:</dt>
 						  <dd class="col-sm-9"><fmt:formatDate type = "date" value = "${show_permesso_attr.note}" /></dd>
+				    	</dl>
+			    	</c:if>
+			    	
+			    	<c:if test="${show_permesso_attr.tipoPermesso == 'MALATTIA'}">
+				    	<dl class="row">
+						  <dt class="col-sm-3 text-right">File:</dt>
+						  <dd class="col-sm-9">${show_permesso_attr.attachment.nomeFile}</dd>
 				    	</dl>
 			    	</c:if>
 			    	

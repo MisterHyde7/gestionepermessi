@@ -108,6 +108,11 @@
 									<form:errors  path="codiceCertificato" cssClass="error_field" />
 								</div>
 								
+								<div class="col-md-6 datiMalattia d-none" id="datiMalattia">
+									  <label for="allegato" class="form-label">Allegato <span class="text-danger">*</span></label>
+									  <input class="form-control" type="file" id="allegato" name="file" required>
+									</div>
+								
 								<div class="col-12">
 									<button type="submit" name="submit" value="submit" id="submit" class="btn btn-primary">Conferma</button>
 									<input class="btn btn-outline-warning" type="reset" value="Ripulisci">
@@ -124,11 +129,11 @@
 				$(document).ready(function(){
 					$('.form-select').click(function(){
 						if($('#tipoPermesso :selected').text()=== 'MALATTIA'){
-							//console.log("MALATTIA");
 							$("#codice").removeClass('d-none');
+							$("#datiMalattia").removeClass('d-none');
 						}else{
-							//console.log("FERIE");
 							$("#codice").addClass('d-none');
+							$("#datiMalattia").addClass('d-none');
 						}
 					});
 					
