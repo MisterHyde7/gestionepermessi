@@ -80,6 +80,33 @@ public class Utente {
 		this.username = nome.toLowerCase().charAt(0) + "." + cognome.toLowerCase();
 	}
 
+	public Utente(Long id, String nome, String cognome, Date dateCreated) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.cognome = cognome;
+		this.dateCreated = dateCreated;
+	}
+
+	public Utente(Long id, String username, String nome, String cognome, StatoUtente stato, Date dateCreated) {
+		super();
+		this.id = id;
+		this.username = username;
+		this.nome = nome;
+		this.cognome = cognome;
+		this.stato = stato;
+		this.dateCreated = dateCreated;
+	}
+
+	public Utente(String username, String password, String nome, String cognome, Date dateCreated, StatoUtente stato) {
+		this.username = username;
+		this.password = password;
+		this.nome = nome;
+		this.cognome = cognome;
+		this.dateCreated = dateCreated;
+		this.stato = stato;
+	}
+
 	public Utente(String username, String password, String nome, String cognome, Date dateCreated) {
 		this.username = username;
 		this.password = password;
@@ -88,15 +115,13 @@ public class Utente {
 		this.dateCreated = dateCreated;
 	}
 
-	public Utente(Long id, String username, String password, String nome, String cognome, Date dateCreated,
-			StatoUtente stato) {
-		this.id = id;
-		this.username = username;
-		this.password = password;
+	public Utente(String nome, String cognome, String username, StatoUtente stato, Date dateCreated) {
+		super();
 		this.nome = nome;
 		this.cognome = cognome;
-		this.dateCreated = dateCreated;
+		this.username = username;
 		this.stato = stato;
+		this.dateCreated = dateCreated;
 	}
 
 	public Long getId() {

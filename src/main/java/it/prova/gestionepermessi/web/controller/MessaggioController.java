@@ -58,8 +58,11 @@ public class MessaggioController {
 
 	@GetMapping("/show/{idMessaggio}")
 	public String showMessaggio(@PathVariable(required = true) Long idMessaggio, Model model) {
+		Messaggio messaggio = messaggioService.caricaSingoloElemento(idMessaggio);
 		model.addAttribute("show_messaggio_attr", MessaggioDTO
-				.buildMessaggioDTOFromModelWithPermesso(messaggioService.caricaSingoloElemento(idMessaggio)));
+				.buildMessaggioDTOFromModelWithPermesso(messaggio));
+		messaggio.setLetto(true);
+		messaggioService.aggiorna(messaggio);
 		return "messaggio/show";
 	}
 

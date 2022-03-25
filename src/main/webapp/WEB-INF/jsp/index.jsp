@@ -125,17 +125,12 @@
 			    </div>
 			  </div>
 			  
-			  <script type="text/javascript">
-			 	 var myModal = new bootstrap.Modal(document.getElementById('confirmOperationModal'))
-				 myModal.show(myModal)
-			  </script>
-			  
-					<!--  <script type="text/javascript">
-					$(document).ready(function(){
-						$('#confirmOperationModal').show()
-					})
-					</script>
-			  		-->
+			<script type="text/javascript">
+				$(document).ready(function(){
+					$('#confirmOperationModal').modal('show')
+				})
+			</script>
+			  		
 			</main>
 			
 			<!-- Footer -->

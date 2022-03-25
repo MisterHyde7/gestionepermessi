@@ -20,6 +20,8 @@ public class Attachment {
 	private String nomeFile;
 	@Column(name = "contentType")
 	private String contentType;
+	@Column(name = "descrizione")
+	private String descrizione;
 
 	@Lob
 	private byte[] payload;
@@ -59,6 +61,14 @@ public class Attachment {
 		this.contentType = contentType;
 	}
 
+	public String getDescrizione() {
+		return descrizione;
+	}
+
+	public void setDescrizione(String descrizione) {
+		this.descrizione = descrizione;
+	}
+
 	public byte[] getPayload() {
 		return payload;
 	}
@@ -66,5 +76,5 @@ public class Attachment {
 	public void setPayload(byte[] payload) {
 		this.payload = payload;
 	}
-	
+
 }

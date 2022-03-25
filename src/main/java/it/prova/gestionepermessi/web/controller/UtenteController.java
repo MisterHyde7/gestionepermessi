@@ -97,7 +97,7 @@ public class UtenteController {
 			model.addAttribute("ruoli_totali_attr", RuoloDTO.createRuoloDTOListFromModelList(ruoloService.listAll()));
 			return "utente/edit";
 		}
-		utenteService.aggiorna(utenteDTO.buildUtenteModel(true));
+		utenteService.aggiorna(utenteDTO.buildUtenteModelConId(true));
 
 		redirectAttrs.addFlashAttribute("successMessage", "Operazione eseguita correttamente");
 		return "redirect:/utente";
@@ -120,12 +120,8 @@ public class UtenteController {
 			@RequestParam(defaultValue = "10") Integer pageSize, @RequestParam(defaultValue = "id") String sortBy,
 			ModelMap model) {
 
-		boolean haRuoli = false;
-		if (utenteExample.getRuoliIds() != null)
-			haRuoli = true;
-		System.out.println(utenteExample.buildUtenteModel(haRuoli).getDateCreated());
 		List<Utente> utenti = utenteService
-				.findByExampleWithPagination(utenteExample.buildUtenteModel(haRuoli), pageNo, pageSize, sortBy)
+				.findByExampleWithPagination(utenteExample.buildUtenteModel(true), pageNo, pageSize, sortBy)
 				.getContent();
 
 		model.addAttribute("utente_list_attribute", UtenteDTO.createUtenteDTOListFromModelList(utenti));

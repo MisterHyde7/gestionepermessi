@@ -43,11 +43,7 @@ public class DipendenteDTO {
 		super();
 	}
 
-	public DipendenteDTO(Long id, @NotBlank(message = "{nome.notblank}") String nome,
-			@NotBlank(message = "{cognome.notblank}") String cognome,
-			@NotBlank(message = "{codiceFiscale.notblank}") @Size(min = 16, max = 16, message = "Il valore inserito '${validatedValue}' deve essere lungo {max} caratteri") String codFis,
-			@NotBlank(message = "{email.notblank}") String email,
-			@NotBlank(message = "{utente.notblank}") Utente utente) {
+	public DipendenteDTO(Long id, String nome, String cognome, String codFis, String email, Utente utente) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -57,10 +53,8 @@ public class DipendenteDTO {
 		this.utente = utente;
 	}
 
-	public DipendenteDTO(Long id, @NotBlank(message = "{nome.notblank}") String nome,
-			@NotBlank(message = "{cognome.notblank}") String cognome,
-			@NotBlank(message = "{codiceFiscale.notblank}") @Size(min = 16, max = 16, message = "Il valore inserito '${validatedValue}' deve essere lungo {max} caratteri") String codFis,
-			String email, Date dataNascita, Date dataAssunzione, Sesso sesso, Utente utente) {
+	public DipendenteDTO(Long id, String nome, String cognome, String codFis, String email, Date dataNascita,
+			Date dataAssunzione, Sesso sesso, Utente utente) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -73,10 +67,7 @@ public class DipendenteDTO {
 		this.utente = utente;
 	}
 
-	public DipendenteDTO(Long id, @NotBlank(message = "{nome.notblank}") String nome,
-			@NotBlank(message = "{cognome.notblank}") String cognome,
-			@NotBlank(message = "{codiceFiscale.notblank}") @Size(min = 16, max = 16, message = "Il valore inserito '${validatedValue}' deve essere lungo {max} caratteri") String codFis,
-			@NotBlank(message = "{email.notblank}") String email) {
+	public DipendenteDTO(Long id, String nome, String cognome, String codFis, String email) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -85,11 +76,7 @@ public class DipendenteDTO {
 		this.email = email;
 	}
 
-	public DipendenteDTO(@NotBlank(message = "{nome.notblank}") String nome,
-			@NotBlank(message = "{cognome.notblank}") String cognome,
-			@NotBlank(message = "{codiceFiscale.notblank}") @Size(min = 16, max = 16, message = "Il valore inserito '${validatedValue}' deve essere lungo {max} caratteri") String codFis,
-			@NotBlank(message = "{email.notblank}") String email,
-			@NotBlank(message = "{utente.notblank}") Utente utente) {
+	public DipendenteDTO(String nome, String cognome, String codFis, String email, Utente utente) {
 		super();
 		this.nome = nome;
 		this.cognome = cognome;
@@ -98,12 +85,8 @@ public class DipendenteDTO {
 		this.utente = utente;
 	}
 
-	public DipendenteDTO(Long id, @NotBlank(message = "{nome.notblank}") String nome,
-			@NotBlank(message = "{cognome.notblank}") String cognome,
-			@NotBlank(message = "{codiceFiscale.notblank}") @Size(min = 16, max = 16, message = "Il valore inserito '${validatedValue}' deve essere lungo {max} caratteri") String codFis,
-			@NotBlank(message = "{email.notblank}") String email, Date dataNascita, Date dataAssunzione,
-			Date dataDimissioni, Sesso sesso, @NotBlank(message = "{utente.notblank}") Utente utente,
-			Long[] permessiIds) {
+	public DipendenteDTO(Long id, String nome, String cognome, String codFis, String email, Date dataNascita,
+			Date dataAssunzione, Date dataDimissioni, Sesso sesso, Utente utente, Long[] permessiIds) {
 		super();
 		this.id = id;
 		this.nome = nome;

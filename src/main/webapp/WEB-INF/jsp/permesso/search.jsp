@@ -60,7 +60,7 @@
 								</select>
 							</div>
 							
-							<div class="col-md-6">
+							<div class="col-md-6 d-none" id="codice">
 								<label for="codiceCertificato" class="form-label">Codice di Certificato</label>
 								<input type="text" class="form-control" name="codiceCertificato" id="codiceCertificato" placeholder="Inserire il codice di certificato" >
 							</div>
@@ -76,6 +76,18 @@
 				<!-- end card-body -->			   
 			    </div>
 			</div>	
+			
+		<script>
+			$('.form-select').click(function(){
+				if($('#tipoPermesso :selected').text()=== 'MALATTIA'){
+					//console.log("MALATTIA");
+					$("#codice").removeClass('d-none');
+				}else{
+					//console.log("FERIE");
+					$("#codice").addClass('d-none');
+				}
+			});
+		</script>
 	
 		</div>
 	<!-- end container -->	

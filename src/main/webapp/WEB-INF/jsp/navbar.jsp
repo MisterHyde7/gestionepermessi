@@ -13,10 +13,7 @@
             <a class="nav-link active" aria-current="page" href="${pageContext.request.contextPath}/home">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+            <a class="nav-link" href="${pageContext.request.contextPath}/attachment">Carica File</a>
           </li>
            <sec:authorize access="hasRole('ADMIN')">
 		      <li class="nav-item dropdown">

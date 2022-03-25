@@ -60,14 +60,23 @@
 								    </spring:bind>
 								    <form:errors  path="tipoPermesso" cssClass="error_field" />
 								</div>
-								<%-- 
-								<script type="text/javascript">
-									$(document).ready(function() {
-										$('#tipoPermesso').click(function(){
-											
-										})
-									});
-								</script> --%>
+								
+								<div class="col-md-6">
+									<label for="note" class="form-label">Note <span class="text-danger">*</span></label>
+									<spring:bind path="note">
+										<input type="text" name="note" id="note" class="form-control ${status.error ? 'is-invalid' : ''}" placeholder="Inserire le note" value="${insert_permesso_attr.note }">
+									</spring:bind>
+									<form:errors  path="note" cssClass="error_field" />
+								</div>
+								
+								<div class="col-md-12 form-check">
+									<div class="form-check">
+										  <input class="form-check-input" name="check" type="checkbox" id="check">
+										  <label class="form-check-label" for="check" >
+										    Giorno Singolo
+										  </label>
+									</div>
+								</div>
 								
 								<fmt:formatDate pattern='yyyy-MM-dd' var="parsedDate" type='date' value='${insert_permesso_attr.dataInizio}' />
 								<div class="col-md-6">
@@ -81,7 +90,7 @@
 								</div>
 								
 								<fmt:formatDate pattern='yyyy-MM-dd' var="parsedDate" type='date' value='${insert_permesso_attr.dataFine}' />
-								<div class="col-md-6">
+								<div class="col-md-6" id="dataFine">
 									<label for="dataFine" class="form-label">Data di Fine <span class="text-danger">*</span></label>
                         			<spring:bind path="dataFine">
 	                        		<input class="form-control ${status.error ? 'is-invalid' : ''}" id="dataFine" type="date" placeholder="dd/MM/yy"
@@ -91,20 +100,12 @@
 	                            	<form:errors  path="dataFine" cssClass="error_field" />
 								</div>
 								
-								<div class="col-md-6">
+								<div class="col-md-6 d-none" id="codice">
 									<label for="codiceCertificato" class="form-label">Codice di Certificato <span class="text-danger">*</span></label>
 									<spring:bind path="codiceCertificato">
 										<input type="text" name="codiceCertificato" id="codiceCertificato" class="form-control ${status.error ? 'is-invalid' : ''}" placeholder="Inserire il codice di certificato" value="${insert_permesso_attr.codiceCertificato }" required>
 									</spring:bind>
 									<form:errors  path="codiceCertificato" cssClass="error_field" />
-								</div>
-								
-								<div class="col-md-6">
-									<label for="note" class="form-label">Note <span class="text-danger">*</span></label>
-									<spring:bind path="note">
-										<input type="text" name="codFis" id="note" class="form-control ${status.error ? 'is-invalid' : ''}" placeholder="Inserire le note" value="${insert_permesso_attr.note }">
-									</spring:bind>
-									<form:errors  path="note" cssClass="error_field" />
 								</div>
 								
 								<div class="col-12">
@@ -117,7 +118,25 @@
 					<!-- end card-body -->			   
 				    </div>
 				<!-- end card -->
-				</div>		
+				</div>	
+				
+				<script>
+				$(document).ready(function(){
+					$('.form-select').click(function(){
+						if($('#tipoPermesso :selected').text()=== 'MALATTIA'){
+							//console.log("MALATTIA");
+							$("#codice").removeClass('d-none');
+						}else{
+							//console.log("FERIE");
+							$("#codice").addClass('d-none');
+						}
+					});
+					
+					$('#check').click(function(){
+						$("#dataFine").toggle();
+					});
+				});
+				</script>	
 					  
 			    
 			  <!-- end container -->  

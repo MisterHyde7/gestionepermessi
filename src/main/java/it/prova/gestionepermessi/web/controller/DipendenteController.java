@@ -105,11 +105,8 @@ public class DipendenteController {
 			@RequestParam(defaultValue = "10") Integer pageSize, @RequestParam(defaultValue = "id") String sortBy,
 			ModelMap model) {
 
-		boolean hasPermessi = false;
-		if (dipendenteExample.getPermessiIds() != null)
-			hasPermessi = true;
 		List<Dipendente> dipendenti = dipendenteService.findByExampleWithPagination(
-				dipendenteExample.buildDipendenteModel(hasPermessi), pageNo, pageSize, sortBy).getContent();
+				dipendenteExample.buildDipendenteModel(true), pageNo, pageSize, sortBy).getContent();
 
 		model.addAttribute("dipendente_list_attribute", DipendenteDTO.createDipendenteDTOListFromModelList(dipendenti));
 		return "dipendente/list";

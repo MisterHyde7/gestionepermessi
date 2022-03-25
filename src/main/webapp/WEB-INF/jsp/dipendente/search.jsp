@@ -70,7 +70,7 @@
 							
 							<div class="col-md-6">
 								<label for="sesso" class="form-label">Sesso</label>
-								<select class="form-select ${status.error ? 'is-invalid' : ''}" id="sesso" name="sesso" required>
+								<select class="form-select ${status.error ? 'is-invalid' : ''}" id="sesso" name="sesso">
 								    <option value="" selected> - Selezionare - </option>
 								    <option value="MASCHIO" ${insert_regista_attr.sesso == 'MASCHIO'?'selected':''} >M</option>
 								    <option value="FEMMINA" ${insert_regista_attr.sesso == 'FEMMINA'?'selected':''} >F</option>

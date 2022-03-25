@@ -128,7 +128,7 @@ public class MessaggioDTO {
 
 	public static MessaggioDTO buildMessaggioDTOFromModelWithPermesso(Messaggio messaggioModel) {
 		MessaggioDTO result = new MessaggioDTO(messaggioModel.getId(), messaggioModel.getTesto(),
-				messaggioModel.getOggetto(), messaggioModel.isLetto());
+				messaggioModel.getOggetto(), true);
 
 		return result;
 	}

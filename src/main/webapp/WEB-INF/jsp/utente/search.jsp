@@ -54,9 +54,9 @@
 								<label for="stato" class="form-label">Stato</label>
 								    <select class="form-select " id="stato" name="stato" >
 								    	<option value="" selected> - Selezionare - </option>
-								      	<option value="ATTIVO" >ATTIVO</option>
-								    	<option value="CREATO">CREATO</option>
-								      	<option value="DISABILITATO" >DISABILITATO</option>
+								      	<option value="${StatoUtente.ATTIVO }" >ATTIVO</option>
+								    	<option value="${StatoUtente.CREATO }">CREATO</option>
+								      	<option value="${StatoUtente.DISABILITATO }" >DISABILITATO</option>
 							    	</select>
 							</div>
 							
